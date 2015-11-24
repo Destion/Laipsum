@@ -43,4 +43,8 @@ public interface NaiveBayesTrainingData {
      * @throws UnknownWordException This happens when the word does not exist in the data.
      */
     NaiveBayesWordData getWord(String word) throws UnknownWordException;
+
+    int getnOccurences();
+
+    int getnJokeOccurrences();
 }

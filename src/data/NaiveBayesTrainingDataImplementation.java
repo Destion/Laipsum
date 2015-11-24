@@ -15,6 +15,8 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     //This is the total amount of words trained, not the amount of unique words!!!
     private int totalWords = 0;
 
+    private int totalJokes = 0;
+
     public NaiveBayesTrainingDataImplementation() {
         data = new HashMap<String, NaiveBayesWordData>();
     }
@@ -44,6 +46,11 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         //increment the total amount of words counted.
         totalWords ++;
 
+        //Increment the total number of jokes if it is a joke.
+        if (isInJoke) {
+            totalJokes ++;
+        }
+
         //Check if we already know this word.
         if (data.containsKey(word)) {
 
@@ -58,6 +65,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
 
                 //If so, increment it's amount of occurrences in a joke.
                 wordData.incrementnJokes();
+
             }
         } else {
 
@@ -76,5 +84,13 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
             throw new UnknownWordException();
         }
         return wordData;
+    }
+
+    public int getnOccurences() {
+        return 0;
+    }
+
+    public int getnJokeOccurrences() {
+        return 0;
     }
 }

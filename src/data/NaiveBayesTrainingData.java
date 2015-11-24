@@ -15,14 +15,17 @@ public interface NaiveBayesTrainingData {
      */
     void addFromFile(File inputFile) throws IOException;
 
-
-    void saveToFile(File outputFile);
+    /**
+     * Saves the data to a File.
+     * @param outputFile the File to write.
+     */
+    void saveToFile(File outputFile) throws IOException;
 
     /**
      * Calculates the chance that a word is in a joke, given this data.
      * @param word The word to be tested
      * @return The chance that the word is in a joke, given this data.
-     * @throws UnknownWordException when the word is not in the data.
+     * @throws UnknownWordException This happens when the word does not exist in the data.
      */
     double getInJokeChance(String word) throws UnknownWordException;
 
@@ -32,4 +35,12 @@ public interface NaiveBayesTrainingData {
      * @param isInJoke Enter whether this word is in a joke (true) or not (false).
      */
     void train(String word, boolean isInJoke);
+
+    /**
+     * Get data about a word
+     * @param word The String representing the word.
+     * @return An object with data about the word.
+     * @throws UnknownWordException This happens when the word does not exist in the data.
+     */
+    NaiveBayesWordData getWord(String word) throws UnknownWordException;
 }

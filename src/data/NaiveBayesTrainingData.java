@@ -30,7 +30,7 @@ public interface NaiveBayesTrainingData {
     double getInJokeChance(String word) throws UnknownWordException;
 
     /**
-     * Adds data about a word to the dataSet.
+     * Adds data about a word to our data.
      * @param word The word.
      * @param isInJoke Enter whether this word is in a joke (true) or not (false).
      */

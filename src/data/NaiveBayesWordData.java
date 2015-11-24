@@ -15,12 +15,22 @@ public interface NaiveBayesWordData {
      * Gets the total number of occurrences of this word in jokes according to this data.
      * @return The number of occurrences of this word in jokes according to this data.
      */
-    int getNjokes();
+    int getnJokes();
 
     /**
      * Gets the total number of occurrences of this word in the data.
      * @return The total number of occurrences in this data.
      */
-    int getNoccurrences();
+    int getnOccurrences();
+
+    /**
+     * Increments the total amount of times this word was found in a joke.
+     */
+    void incrementnJokes();
+
+    /**
+     * Increments the total amount of times this word was found.
+     */
+    void incrementnOccurrences();
 
 }

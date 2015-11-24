@@ -1,9 +1,9 @@
 package data;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by gerben on 24-11-15.
@@ -22,25 +22,50 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     }
 
     public void addFromFile(File inputFile) throws IOException {
-        //TODO: implement file loading
-        throw new IOException("Not yet implemented!");
+        Scanner in = new Scanner(new FileInputStream(inputFile));
+        while (in.hasNext()) {
+            String line = in.nextLine();
+            String[] args = line.split(",");
+            if (args.length == 3) {
+                totalJokes += Integer.decode(args[1]);
+                totalWords += Integer.decode(args[2]);
+                if (data.containsKey(args[0])){
+                    NaiveBayesWordData word = data.get(args[0]);
+                    NaiveBayesWordData newWord = new NaiveBayesWordDataImplementation(
+                            args[0],
+                            Integer.decode(args[1]) + word.getnJokes(),
+                            Integer.decode(args[2]) + word.getnOccurrences()
+                            );
+                    data.put(args[0], newWord);
+
+                } else {
+                    data.put(args[0],
+                            new NaiveBayesWordDataImplementation(
+                                    args[0],
+                                    Integer.decode(args[1]),
+                                    Integer.decode(args[2]
+                                    )
+                            )
+                    );
+                }
+
+            }
+        }
+        in.close();
     }
 
     public void saveToFile(File outputFile) throws IOException {
-        //TODO: implement file saving
-        throw new IOException("Not yet implemented!");
-    }
-
-    public double getInJokeChance(String word) throws UnknownWordException {
-        //Get the word from our data
-        NaiveBayesWordData wordData = data.get(word);
-
-        if (wordData == null) {
-            //If the word is not known, throw an Exception.
-            throw new UnknownWordException();
+        Writer out = new FileWriter(outputFile);
+        for (NaiveBayesWordData word: data.values()) {
+            out.write(String.format("%s,%d,%d\n",
+                    word.getWord(),
+                    word.getnJokes(),
+                    word.getnOccurrences()
+                    ));
         }
-        return ((double) wordData.getnJokes()/(double) wordData.getnOccurrences());
+        out.close();
     }
+
 
     public void train(String word, boolean isInJoke) {
         //increment the total amount of words counted.
@@ -86,11 +111,11 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         return wordData;
     }
 
-    public int getnOccurences() {
-        return 0;
+    public int getnOccurrences() {
+        return totalWords;
     }
 
     public int getnJokeOccurrences() {
-        return 0;
+        return totalJokes;
     }
 }

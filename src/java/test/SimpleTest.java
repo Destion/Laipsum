@@ -40,7 +40,8 @@ public class SimpleTest {
 
     public static void assertEqual(String testSummary, boolean answer, boolean targetAnswer) {
         if (answer != targetAnswer) {
-            System.out.printf("Test resulted in wrong result: \"%s\"\nExpected value:\tActual value:\n%s\t%s\n", testSummary, targetAnswer, answer);
+            //System.out.printf("Test resulted in wrong result: \"%s\"\nExpected value:\tActual value:\n%s\t%s\n", testSummary, targetAnswer, answer);
+            System.out.printf("Test resulted in wrong result: \"%s\"\n Expected value: \t\t %s \n Actual value: \t\t\t %s\n", testSummary, targetAnswer, answer);
         }
     }
 }

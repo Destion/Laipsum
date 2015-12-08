@@ -15,7 +15,7 @@ In code functions of the Classifier and related classes:
 - Main: This file is here to ensure we don't get too serious.
 
 ####How to execute a Class:
-A step by step explaination:
+A step by step explanation:
 - Download and install Java Version 8 (make sure it is actually 8!!!)
 - Make sure that the commandline "java" command is actually java 8
 - Double check the previous statement

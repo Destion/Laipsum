@@ -12,29 +12,42 @@ import java.util.Map;
 public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier {
     NaiveBayesTrainingData data = new NaiveBayesTrainingDataImplementation();
 
-    public boolean isClass(String text) {
+
+    public String getClass(String text) {
         String[] normalized = normalize(text);
-        double totalClass = data.getnClassOccurrences();
-        double totalNonClass = data.getnOccurrences() - data.getnClassOccurrences();
-        double chanceClassGivenText = Math.log(totalClass) - Math.log(data.getnOccurrences());
-        double chanceNotClassGivenText = Math.log(totalNonClass) - Math.log(data.getnOccurrences());
-        for (String word: normalized) {
-            try {
-                NaiveBayesWordData wordData = data.getWord(word);
-                if (wordData.getnOccurrences() > 5) {
-                    chanceClassGivenText += Math.log(wordData.getnClass()) - Math.log(totalClass);
-                    chanceNotClassGivenText += Math.log(wordData.getnOccurrences() - wordData.getnClass()) - Math.log(totalNonClass);
+        String[] classes = data.getClasses();
+        double[] logPropabilities = new double[classes.length];
+        for (int i = 0; i < classes.length; i++) {
+            String c = classes[i];
+            double totalClass = data.getnClassOccurrences(c) + 1;
+            double chanceClassGivenText = Math.log(totalClass) - Math.log(data.getnOccurrences() + 1);
+            for (String word : normalized) {
+                try {
+                    NaiveBayesWordData wordData = data.getWord(word);
+                    if (wordData.getnOccurrences() > 5) {
+                        chanceClassGivenText += Math.log(wordData.getnClass(c) + 1) - Math.log(totalClass);
+                    }
+
+
+                } catch (UnknownWordException e) {
+                    chanceClassGivenText *= 1.0;
                 }
+            }
+            logPropabilities[i] = chanceClassGivenText;
 
+        }
 
-            } catch (UnknownWordException e) {
-                chanceClassGivenText *= 1.0;
-                chanceNotClassGivenText *= 1.0;
+        int highestI = 0;
+        double highestValue = -1/0.0;
+        for (int i = 0; i < classes.length; i++) {
+
+            if (logPropabilities[i] > highestValue) {
+                highestI = i;
+                highestValue = logPropabilities[i];
             }
         }
 
-
-        return chanceClassGivenText>chanceNotClassGivenText;
+        return classes[highestI];
     }
 
     public static String[] normalize(String text) {
@@ -48,14 +61,14 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
         return text.split(" ");
     }
 
-    public void train(String text, boolean isClass) {
+    public void train(String text, String c) {
         for (String word: normalize(text)) {
-            data.train(word, isClass);
+            data.train(word, c);
         }
 
     }
 
-    public void train(Map<String, Boolean> data) {
+    public void train(Map<String, String> data) {
         for(String text: data.keySet()) {
             train(text, data.get(text));
         }

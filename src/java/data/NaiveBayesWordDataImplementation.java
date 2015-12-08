@@ -1,16 +1,18 @@
 package data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by gerben on 24-11-15.
  */
 public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
-    String word;
-    int nClasss;
-    int nOccurrences;
+    private String word;
+    private final Map<String, Integer> occurrences = new HashMap<String, Integer>();
+    private int nOccurrences;
 
-    public NaiveBayesWordDataImplementation(String word, int nClasss, int nOccurrences) {
+    public NaiveBayesWordDataImplementation(String word, int nOccurrences) {
         this.word = word;
-        this.nClasss = nClasss;
         this.nOccurrences = nOccurrences;
     }
 
@@ -18,16 +20,25 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
         return word;
     }
 
-    public int getnClass() {
-        return nClasss;
+    public int getnClass(String c) {
+        Integer occ = occurrences.get(c);
+        return occ==null?0:occ;
     }
 
     public int getnOccurrences() {
         return nOccurrences;
     }
 
-    public void incrementnClass() {
-        nClasss+=1;
+    public void incrementnClass(String c) {
+        incrementnClass(c, 1);
+    }
+
+    public void incrementnClass(String c, int amount) {
+        if (occurrences.containsKey(c)) {
+            occurrences.put(c, occurrences.get(c) + amount);
+        } else {
+            occurrences.put(c, 0);
+        }
     }
 
     public void incrementnOccurrences() {

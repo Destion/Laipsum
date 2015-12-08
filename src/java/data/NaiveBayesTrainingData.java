@@ -25,9 +25,9 @@ public interface NaiveBayesTrainingData {
     /**
      * Adds data about a word to our data.
      * @param word The word.
-     * @param isInClass Enter whether this word is of the Class (true) or not (false).
+     * @param c The class of document it is in.
      */
-    void train(String word, boolean isInClass);
+    void train(String word, String c);
 
     /**
      * Get data about a word
@@ -39,5 +39,8 @@ public interface NaiveBayesTrainingData {
 
     int getnOccurrences();
 
-    int getnClassOccurrences();
+    int getnClassOccurrences(String c);
+
+    String[] getClasses();
+
 }

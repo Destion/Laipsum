@@ -13,9 +13,10 @@ public interface NaiveBayesWordData {
 
     /**
      * Gets the total number of occurrences of this word in the Class according to this data.
+     * @param c The Class name
      * @return The number of occurrences of this word in this Class according to this data.
      */
-    int getnClass();
+    int getnClass(String c);
 
     /**
      * Gets the total number of occurrences of this word in the data.
@@ -24,9 +25,17 @@ public interface NaiveBayesWordData {
     int getnOccurrences();
 
     /**
-     * Increments the total amount of times this word was found as part of this Class.
+     * Increments the total amount of times this word was found as part of this Class by a certain amount.
+     * @param c The class
      */
-    void incrementnClass();
+    void incrementnClass(String c, int amount);
+
+
+    /**
+     * Increments the total amount of times this word was found as part of this Class.
+     * @param c The class
+     */
+    void incrementnClass(String c);
 
     /**
      * Increments the total amount of times this word was found.

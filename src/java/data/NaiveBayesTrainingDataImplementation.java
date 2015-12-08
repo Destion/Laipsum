@@ -15,7 +15,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     //This is the total amount of words trained, not the amount of unique words!!!
     private int totalWords = 0;
 
-    private int totalClasss = 0;
+    private final Map<String, Integer> totals = new HashMap<String, Integer>();
 
     public NaiveBayesTrainingDataImplementation() {
         data = new HashMap<String, NaiveBayesWordData>();
@@ -23,17 +23,24 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
 
     public void addFromFile(File inputFile) throws IOException {
         Scanner in = new Scanner(new FileInputStream(inputFile));
-        while (in.hasNext()) {
+        String[] classNames = null;
+        if(in.hasNextLine()) {
+            String line = in.nextLine();
+            classNames = line.split(",");
+
+        }
+        while (in.hasNextLine()) {
             String line = in.nextLine();
             String[] args = line.split(",");
-            if (args.length == 3) {
-                totalClasss += Integer.decode(args[1]);
+            if (args.length == classNames.length + 2) {
+                for (int i = 0; i < classNames.length; i++) {
+                    totals.put(classNames[i], Integer.decode(args[i+1]));
+                }
                 totalWords += Integer.decode(args[2]);
                 if (data.containsKey(args[0])){
                     NaiveBayesWordData word = data.get(args[0]);
                     NaiveBayesWordData newWord = new NaiveBayesWordDataImplementation(
                             args[0],
-                            Integer.decode(args[1]) + word.getnClass(),
                             Integer.decode(args[2]) + word.getnOccurrences()
                             );
                     data.put(args[0], newWord);
@@ -42,11 +49,15 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
                     data.put(args[0],
                             new NaiveBayesWordDataImplementation(
                                     args[0],
-                                    Integer.decode(args[1]),
                                     Integer.decode(args[2]
                                     )
                             )
                     );
+                    for (int i = 0; i < classNames.length; i++) {
+                        data.get(args[0]).incrementnClass(classNames[i],
+                                Integer.decode(args[i+1]));
+
+                    }
                 }
 
             }
@@ -56,10 +67,24 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
 
     public void saveToFile(File outputFile) throws IOException {
         Writer out = new FileWriter(outputFile);
+        String[] classes = (String[]) totals.keySet().toArray();
+        String classString = "";
+        for (int i = 0; i < classes.length; i++) {
+            classString += classes[i];
+            if (i < classes.length-1){
+                classString += ",";
+            }
+        }
+        out.write(classString+"\n");
         for (NaiveBayesWordData word: data.values()) {
-            out.write(String.format("%s,%d,%d\n",
+            String classInfo = "";
+            for (String c : classes) {
+                classInfo += word.getnClass(c) + ",";
+            }
+
+            out.write(String.format("%s,%s%d\n",
                     word.getWord(),
-                    word.getnClass(),
+                    classInfo,
                     word.getnOccurrences()
                     ));
         }
@@ -67,13 +92,15 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     }
 
 
-    public void train(String word, boolean isInClass) {
+    public void train(String word, String c) {
         //increment the total amount of words counted.
         totalWords ++;
 
         //Increment the total number of jokes if it is a joke.
-        if (isInClass) {
-            totalClasss ++;
+        if (totals.containsKey(c)) {
+            totals.put(c, totals.get(c) + 1);
+        } else {
+            totals.put(c, 1);
         }
 
         //Check if we already know this word.
@@ -85,17 +112,15 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
             //Increment it's number of occurrences.
             wordData.incrementnOccurrences();
 
-            //Check if the word is part of a joke.
-            if (isInClass) {
+            //Increment it's amount of occurrences in the class.
+            wordData.incrementnClass(c);
 
-                //If so, increment it's amount of occurrences in a joke.
-                wordData.incrementnClass();
-
-            }
         } else {
 
-            //Add the word to our data and set it's variables. Always add 1 to both classes because our classifier will not work otherwise.
-            data.put(word, new NaiveBayesWordDataImplementation(word, isInClass?2:1, 3));
+            //Add the word to our data and set it's variables.
+            NaiveBayesWordData newData = new NaiveBayesWordDataImplementation(word, 1);
+            data.put(word, newData);
+            newData.incrementnClass(c);
         }
     }
 
@@ -115,7 +140,19 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         return totalWords;
     }
 
-    public int getnClassOccurrences() {
-        return totalClasss;
+    public int getnClassOccurrences(String c) {
+        Integer occurrences = totals.get(c);
+
+        return occurrences==null?0:occurrences;
+    }
+
+    public String[] getClasses() {
+        Object[] in = totals.keySet().toArray();
+        String[] out = new String[in.length];
+        for (int i = 0; i < in.length; i++) {
+            Object o = in[i];
+            out[i] = (String) o;
+        }
+        return out;
     }
 }

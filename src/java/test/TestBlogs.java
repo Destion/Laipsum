@@ -19,7 +19,7 @@ public class TestBlogs {
             File[] files = (new File("./blogs/TrainingSet/"+gender)).listFiles();
             for (int i = 0; i < files.length; i++) {
                 try {
-                    classifier.train(DocumentLoader.loadFromFile(files[i]), gender.equals("F"));
+                    classifier.train(DocumentLoader.loadFromFile(files[i]), gender);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -37,15 +37,15 @@ public class TestBlogs {
             File[] files = (new File("./blogs/TestSet/"+gender)).listFiles();
             for (int i = 0; i < files.length; i++) {
                 try {
-                    boolean isFemale = classifier.isClass(DocumentLoader.loadFromFile(files[i]));
+                    String classifiedAs = classifier.getClass(DocumentLoader.loadFromFile(files[i]));
                     if (gender.equals("F")) {
-                        if (isFemale) {
+                        if (classifiedAs.equals("F")) {
                             ff += 1;
                         } else {
                             mf += 1;
                         }
                     } else {
-                        if (isFemale) {
+                        if (classifiedAs.equals("F")) {
                             fm += 1;
                         } else {
                             mm += 1;

@@ -26,16 +26,16 @@ public class LoadFromSQL {
         }
     }
 
-    public static Map<String, Boolean> loadFromSQL(File sqlFile) throws FileNotFoundException {
+    public static Map<String, String> loadFromSQL(File sqlFile) throws FileNotFoundException {
         Scanner in = new Scanner(new FileReader(sqlFile));
-        Map<String, Boolean> out = new HashMap<String, Boolean>();
+        Map<String, String> out = new HashMap<String, String>();
 
         while (in.hasNext()){
             String line = in.nextLine();
             if (line.matches(".* VALUES \\([0-9]*, '[^']*', '[^']*'\\);")){
                 line = line.replaceAll(".* VALUES \\([0-9]*, '[^']*', '", "");
                 line = line.replaceAll("\\\\r\\\\n", " ");
-                out.put(line, true);
+                out.put(line, "joke");
             }
 
         }

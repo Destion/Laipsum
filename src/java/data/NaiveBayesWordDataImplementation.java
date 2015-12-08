@@ -5,12 +5,12 @@ package data;
  */
 public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
     String word;
-    int nJokes;
+    int nClasss;
     int nOccurrences;
 
-    public NaiveBayesWordDataImplementation(String word, int nJokes, int nOccurrences) {
+    public NaiveBayesWordDataImplementation(String word, int nClasss, int nOccurrences) {
         this.word = word;
-        this.nJokes = nJokes;
+        this.nClasss = nClasss;
         this.nOccurrences = nOccurrences;
     }
 
@@ -18,16 +18,16 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
         return word;
     }
 
-    public int getnJokes() {
-        return nJokes;
+    public int getnClass() {
+        return nClasss;
     }
 
     public int getnOccurrences() {
         return nOccurrences;
     }
 
-    public void incrementnJokes() {
-        nJokes+=1;
+    public void incrementnClass() {
+        nClasss+=1;
     }
 
     public void incrementnOccurrences() {

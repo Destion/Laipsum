@@ -18,19 +18,19 @@ public class SimpleTest {
         NaiveBayesClassifier classifier = new NaiveBayesClassifierImplementation();
 
         Map <String, Boolean> trainingMap = new HashMap<String, Boolean>();
-        trainingMap.put("Joke Joke Joke", true);
-        trainingMap.put("Joke Joke", true);
+        trainingMap.put("Class Class Class", true);
+        trainingMap.put("Class Class", true);
         trainingMap.put("Not a joke, not a joke, not a joke", false);
         trainingMap.put("Not a joke, no joke", false);
         trainingMap.put("Not not a joke, so a joke", true);
 
         classifier.train(trainingMap);
         classifier.trainFromFile(new File("./jokes.csv"));
-        assertEqual("Joke tested as joke", classifier.isJoke(
+        assertEqual("Class tested as joke", classifier.isClass(
                 "What is uglier than an aardvark? Two aardvarks!")
                 , true);
 
-        assertEqual("Non joke is not classified as joke.", classifier.isJoke(
+        assertEqual("Non joke is not classified as joke.", classifier.isClass(
                 "The moon does not have a fixed distance to the earth")
                 , false);
 

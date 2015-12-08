@@ -9,23 +9,23 @@ import java.util.Map;
 public interface NaiveBayesClassifier {
 
     /**
-     * This method will decide whether an input String is a joke or not.
+     * This method will decide whether an input String is of the Class or not.
      * @param text the text to be classified.
-     * @return Returns true if the String is a joke, false if not.
+     * @return Returns true if the String is of our Class, false if not.
      */
-    boolean isJoke(String text);
+    boolean isClass(String text);
 
     /**
      * Train the algorithm with a new text
-     * @param text The text that is either a joke or not
-     * @param isJoke A boolean indicating whether the text is a joke or not
+     * @param text The text that is either of our Class or not
+     * @param isClass A boolean indicating whether the text is of our Class or not
      */
-    void train(String text, boolean isJoke);
+    void train(String text, boolean isClass);
 
     /**
-     * Train the algorithm using multiple sentences.
+     * Train the algorithm using multiple documents.
      * @param data A Map with a String that represents the text
-     *             and a Boolean to indicate whether the text is a joke or not.
+     *             and a Boolean to indicate whether the text is of our Class or not.
      */
     void train(Map<String, Boolean> data);
 

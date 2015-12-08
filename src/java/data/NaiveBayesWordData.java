@@ -12,10 +12,10 @@ public interface NaiveBayesWordData {
     String getWord();
 
     /**
-     * Gets the total number of occurrences of this word in jokes according to this data.
-     * @return The number of occurrences of this word in jokes according to this data.
+     * Gets the total number of occurrences of this word in the Class according to this data.
+     * @return The number of occurrences of this word in this Class according to this data.
      */
-    int getnJokes();
+    int getnClass();
 
     /**
      * Gets the total number of occurrences of this word in the data.
@@ -24,9 +24,9 @@ public interface NaiveBayesWordData {
     int getnOccurrences();
 
     /**
-     * Increments the total amount of times this word was found in a joke.
+     * Increments the total amount of times this word was found as part of this Class.
      */
-    void incrementnJokes();
+    void incrementnClass();
 
     /**
      * Increments the total amount of times this word was found.

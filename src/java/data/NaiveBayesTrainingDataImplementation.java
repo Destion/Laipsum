@@ -15,7 +15,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     //This is the total amount of words trained, not the amount of unique words!!!
     private int totalWords = 0;
 
-    private int totalJokes = 0;
+    private int totalClasss = 0;
 
     public NaiveBayesTrainingDataImplementation() {
         data = new HashMap<String, NaiveBayesWordData>();
@@ -27,13 +27,13 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
             String line = in.nextLine();
             String[] args = line.split(",");
             if (args.length == 3) {
-                totalJokes += Integer.decode(args[1]);
+                totalClasss += Integer.decode(args[1]);
                 totalWords += Integer.decode(args[2]);
                 if (data.containsKey(args[0])){
                     NaiveBayesWordData word = data.get(args[0]);
                     NaiveBayesWordData newWord = new NaiveBayesWordDataImplementation(
                             args[0],
-                            Integer.decode(args[1]) + word.getnJokes(),
+                            Integer.decode(args[1]) + word.getnClass(),
                             Integer.decode(args[2]) + word.getnOccurrences()
                             );
                     data.put(args[0], newWord);
@@ -59,7 +59,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         for (NaiveBayesWordData word: data.values()) {
             out.write(String.format("%s,%d,%d\n",
                     word.getWord(),
-                    word.getnJokes(),
+                    word.getnClass(),
                     word.getnOccurrences()
                     ));
         }
@@ -67,13 +67,13 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     }
 
 
-    public void train(String word, boolean isInJoke) {
+    public void train(String word, boolean isInClass) {
         //increment the total amount of words counted.
         totalWords ++;
 
         //Increment the total number of jokes if it is a joke.
-        if (isInJoke) {
-            totalJokes ++;
+        if (isInClass) {
+            totalClasss ++;
         }
 
         //Check if we already know this word.
@@ -86,16 +86,16 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
             wordData.incrementnOccurrences();
 
             //Check if the word is part of a joke.
-            if (isInJoke) {
+            if (isInClass) {
 
                 //If so, increment it's amount of occurrences in a joke.
-                wordData.incrementnJokes();
+                wordData.incrementnClass();
 
             }
         } else {
 
-            //Add the word to our data and set it's variables.
-            data.put(word, new NaiveBayesWordDataImplementation(word, isInJoke?1:0, 1));
+            //Add the word to our data and set it's variables. Always add 1 to both classes because our classifier will not work otherwise.
+            data.put(word, new NaiveBayesWordDataImplementation(word, isInClass?2:1, 3));
         }
     }
 
@@ -115,7 +115,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         return totalWords;
     }
 
-    public int getnJokeOccurrences() {
-        return totalJokes;
+    public int getnClassOccurrences() {
+        return totalClasss;
     }
 }

@@ -12,27 +12,29 @@ import java.util.Map;
 public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier {
     NaiveBayesTrainingData data = new NaiveBayesTrainingDataImplementation();
 
-    public boolean isJoke(String text) {
+    public boolean isClass(String text) {
         String[] normalized = normalize(text);
-        double totalJokes = data.getnJokeOccurrences();
-        double totalNonJokes = data.getnOccurrences() - data.getnJokeOccurrences();
-        double chanceJokeGivenText = totalJokes/data.getnOccurrences();
-        double chanceNotJokeGivenText = totalNonJokes/data.getnOccurrences();
+        double totalClass = data.getnClassOccurrences();
+        double totalNonClass = data.getnOccurrences() - data.getnClassOccurrences();
+        double chanceClassGivenText = Math.log(totalClass) - Math.log(data.getnOccurrences());
+        double chanceNotClassGivenText = Math.log(totalNonClass) - Math.log(data.getnOccurrences());
         for (String word: normalized) {
             try {
                 NaiveBayesWordData wordData = data.getWord(word);
-                chanceJokeGivenText *= wordData.getnJokes()/totalJokes;
-                chanceNotJokeGivenText *= (wordData.getnOccurrences() - wordData.getnJokes())/totalNonJokes;
+                if (wordData.getnOccurrences() > 5) {
+                    chanceClassGivenText += Math.log(wordData.getnClass()) - Math.log(totalClass);
+                    chanceNotClassGivenText += Math.log(wordData.getnOccurrences() - wordData.getnClass()) - Math.log(totalNonClass);
+                }
 
 
             } catch (UnknownWordException e) {
-                chanceJokeGivenText *= 1.0;
-                chanceNotJokeGivenText *= 1.0;
+                chanceClassGivenText *= 1.0;
+                chanceNotClassGivenText *= 1.0;
             }
         }
 
-        System.out.printf("Joke: %f, not a joke: %f\n", chanceJokeGivenText, chanceNotJokeGivenText);
-        return chanceJokeGivenText>chanceNotJokeGivenText;
+
+        return chanceClassGivenText>chanceNotClassGivenText;
     }
 
     public static String[] normalize(String text) {
@@ -46,9 +48,9 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
         return text.split(" ");
     }
 
-    public void train(String text, boolean isJoke) {
+    public void train(String text, boolean isClass) {
         for (String word: normalize(text)) {
-            data.train(word, isJoke);
+            data.train(word, isClass);
         }
 
     }

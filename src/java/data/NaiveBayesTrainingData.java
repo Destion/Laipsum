@@ -25,9 +25,9 @@ public interface NaiveBayesTrainingData {
     /**
      * Adds data about a word to our data.
      * @param word The word.
-     * @param isInJoke Enter whether this word is in a joke (true) or not (false).
+     * @param isInClass Enter whether this word is of the Class (true) or not (false).
      */
-    void train(String word, boolean isInJoke);
+    void train(String word, boolean isInClass);
 
     /**
      * Get data about a word
@@ -39,5 +39,5 @@ public interface NaiveBayesTrainingData {
 
     int getnOccurrences();
 
-    int getnJokeOccurrences();
+    int getnClassOccurrences();
 }

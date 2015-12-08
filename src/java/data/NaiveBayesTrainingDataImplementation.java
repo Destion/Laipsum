@@ -1,5 +1,7 @@
 package data;
 
+import main.Util;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,14 +36,20 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
             String[] args = line.split(",");
             if (args.length == classNames.length + 2) {
                 for (int i = 0; i < classNames.length; i++) {
-                    totals.put(classNames[i], Integer.decode(args[i+1]));
+                    int value = Integer.decode(args[i + 1]);
+                    if (totals.containsKey(classNames[i])) {
+                        totals.put(classNames[i], totals.get(classNames[i]) + value);
+                    } else {
+                        totals.put(classNames[i], value);
+
+                    }
                 }
-                totalWords += Integer.decode(args[2]);
+                totalWords += Integer.decode(args[args.length - 1]);
                 if (data.containsKey(args[0])){
                     NaiveBayesWordData word = data.get(args[0]);
                     NaiveBayesWordData newWord = new NaiveBayesWordDataImplementation(
                             args[0],
-                            Integer.decode(args[2]) + word.getnOccurrences()
+                            Integer.decode(args[args.length - 1]) + word.getnOccurrences()
                             );
                     data.put(args[0], newWord);
 
@@ -49,7 +57,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
                     data.put(args[0],
                             new NaiveBayesWordDataImplementation(
                                     args[0],
-                                    Integer.decode(args[2]
+                                    Integer.decode(args[args.length - 1]
                                     )
                             )
                     );
@@ -67,7 +75,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
 
     public void saveToFile(File outputFile) throws IOException {
         Writer out = new FileWriter(outputFile);
-        String[] classes = (String[]) totals.keySet().toArray();
+        String[] classes = Util.toStringArray(totals.keySet().toArray());
         String classString = "";
         for (int i = 0; i < classes.length; i++) {
             classString += classes[i];
@@ -147,12 +155,6 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     }
 
     public String[] getClasses() {
-        Object[] in = totals.keySet().toArray();
-        String[] out = new String[in.length];
-        for (int i = 0; i < in.length; i++) {
-            Object o = in[i];
-            out[i] = (String) o;
-        }
-        return out;
+        return Util.toStringArray(totals.keySet().toArray());
     }
 }

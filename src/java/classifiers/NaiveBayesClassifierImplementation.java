@@ -19,14 +19,14 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
         double[] logPropabilities = new double[classes.length];
         for (int i = 0; i < classes.length; i++) {
             String c = classes[i];
-            double totalClass = data.getnClassOccurrences(c) + 1;
-            double chanceClassGivenText = Math.log(totalClass) - Math.log(data.getnOccurrences() + 1);
+            double totalClass = data.getnClassOccurrences(c);
+            double chanceClassGivenText = Math.log(totalClass) - Math.log(data.getnOccurrences());
             for (String word : normalized) {
                 try {
                     NaiveBayesWordData wordData = data.getWord(word);
-                    if (wordData.getnOccurrences() > 5) {
-                        chanceClassGivenText += Math.log(wordData.getnClass(c) + 1) - Math.log(totalClass);
-                    }
+
+                    chanceClassGivenText += Math.log(wordData.getnClass(c) + 1) - Math.log(totalClass + classes.length);
+
 
 
                 } catch (UnknownWordException e) {

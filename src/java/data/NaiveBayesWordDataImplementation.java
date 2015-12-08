@@ -37,7 +37,7 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
         if (occurrences.containsKey(c)) {
             occurrences.put(c, occurrences.get(c) + amount);
         } else {
-            occurrences.put(c, 0);
+            occurrences.put(c, amount);
         }
     }
 

@@ -10,6 +10,8 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
     private String word;
     private final Map<String, Integer> occurrences = new HashMap<String, Integer>();
     private int nOccurrences;
+    private double mutualInformation;
+    private boolean miValid = false;
 
     public NaiveBayesWordDataImplementation(String word, int nOccurrences) {
         this.word = word;
@@ -34,6 +36,7 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
     }
 
     public void incrementnClass(String c, int amount) {
+        miValid = false;
         if (occurrences.containsKey(c)) {
             occurrences.put(c, occurrences.get(c) + amount);
         } else {
@@ -42,6 +45,20 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
     }
 
     public void incrementnOccurrences() {
+        miValid = false;
         nOccurrences+=1;
     }
+
+    public void setMutualInformation(double maxMutualInfo) {
+        mutualInformation = maxMutualInfo;
+        miValid = true;
+    }
+
+    public double getMutualInformation() throws MutualInformationInvalidException {
+        if (!miValid) {
+            throw new MutualInformationInvalidException();
+        }
+        return mutualInformation;
+    }
+
 }

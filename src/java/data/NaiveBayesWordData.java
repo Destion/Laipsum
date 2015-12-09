@@ -42,4 +42,11 @@ public interface NaiveBayesWordData {
      */
     void incrementnOccurrences();
 
+
+    void setMutualInformation(double maxMutualInfo);
+
+    double getMutualInformation() throws MutualInformationInvalidException;
+
+    class MutualInformationInvalidException extends Exception {
+    }
 }

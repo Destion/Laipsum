@@ -37,10 +37,19 @@ public interface NaiveBayesTrainingData {
      */
     NaiveBayesWordData getWord(String word) throws UnknownWordException;
 
+    /**
+     *
+     * @return
+     */
     int getnOccurrences();
 
     int getnClassOccurrences(String c);
 
     String[] getClasses();
+
+    /**
+     * Gives the Mutual Information of this world
+     */
+    double getMutualInformation(NaiveBayesWordData word);
 
 }

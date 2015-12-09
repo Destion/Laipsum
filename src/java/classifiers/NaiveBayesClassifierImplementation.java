@@ -24,8 +24,10 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
             for (String word : normalized) {
                 try {
                     NaiveBayesWordData wordData = data.getWord(word);
-
-                    chanceClassGivenText += Math.log(wordData.getnClass(c) + 1) - Math.log(totalClass + classes.length);
+                    double mi = data.getMutualInformation(wordData);
+                    if (mi > 2) {
+                        chanceClassGivenText += Math.log(wordData.getnClass(c) + 1) - Math.log(totalClass + classes.length);
+                    }
 
 
 

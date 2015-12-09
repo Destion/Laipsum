@@ -157,4 +157,26 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     public String[] getClasses() {
         return Util.toStringArray(totals.keySet().toArray());
     }
+
+    public double getMutualInformation(NaiveBayesWordData word) {
+        try {
+            return word.getMutualInformation();
+        } catch (NaiveBayesWordData.MutualInformationInvalidException e) {
+            String[] classes = getClasses();
+            double maxMutualInfo = Double.NEGATIVE_INFINITY;
+            for (int i = 0; i < classes.length; i++) {
+                double a = word.getnClass(classes[i]);
+                double b = word.getnOccurrences() - a;
+                //a+=1;
+                //b+=1;
+                double mi = -Math.log(1 + 1/(a/b))-Math.log((word.getnOccurrences())/totalWords);
+                if (mi > maxMutualInfo) {
+                    maxMutualInfo = mi;
+                }
+            }
+            word.setMutualInformation(maxMutualInfo);
+            return maxMutualInfo;
+        }
+
+    }
 }

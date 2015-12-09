@@ -40,7 +40,7 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
         }
 
         int highestI = 0;
-        double highestValue = -1/0.0;
+        double highestValue = Double.NEGATIVE_INFINITY;
         for (int i = 0; i < classes.length; i++) {
 
             if (logPropabilities[i] > highestValue) {

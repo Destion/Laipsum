@@ -21,7 +21,7 @@ public class TestMultipleClasses {
 
         //Save the classifier data, to test this part of the implementation.
 
-        File file = new File("./notDutchNotMuch.nl");
+        File file = new File("./GerbenIsEenPizza.gov");
         classifier.saveKnowledgeToFile(file);
         NaiveBayesClassifier classifier2 = classifier;
         classifier = new NaiveBayesClassifierImplementation();

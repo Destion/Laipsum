@@ -1,5 +1,7 @@
 package classifiers;
 
+import data.UnknownWordException;
+
 import java.io.File;
 import java.util.Map;
 

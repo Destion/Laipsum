@@ -4,6 +4,7 @@ import data.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Map;
  */
 public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier {
     NaiveBayesTrainingData data = new NaiveBayesTrainingDataImplementation();
+    ArrayList<Double> MiList= new ArrayList<Double>();
 
 
     public String getClass(String text) {
@@ -25,13 +27,24 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
                 try {
                     NaiveBayesWordData wordData = data.getWord(word);
                     double mi = data.getMutualInformation(wordData);
-                    if (mi > 2) {
-                        chanceClassGivenText += Math.log(wordData.getnClass(c) + 1) - Math.log(totalClass + classes.length);
-                    }
-
-
-
+                    MiList.add(mi);
                 } catch (UnknownWordException e) {
+                    chanceClassGivenText *= 1.0;
+                }
+            }
+            double miAver = 0.0;
+            for (double MI : MiList){
+                miAver += MI;
+            }
+            miAver = miAver/MiList.size();
+            for (String word2 : normalized) {
+                try {
+                    NaiveBayesWordData wordData2 = data.getWord(word2);
+                    double mi2 = data.getMutualInformation(wordData2);
+                    if (mi2 >= miAver){
+                        chanceClassGivenText += Math.log(wordData2.getnClass(c) + 1) - Math.log(totalClass + classes.length);
+                    }
+                } catch(UnknownWordException e){
                     chanceClassGivenText *= 1.0;
                 }
             }

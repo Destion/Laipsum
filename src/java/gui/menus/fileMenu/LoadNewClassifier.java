@@ -24,8 +24,12 @@ public class LoadNewClassifier extends JMenuItem implements ActionListener {
         File file = Util.promptFile();
         if (file != null) {
                 NaiveBayesClassifier classifier = new NaiveBayesClassifierImplementation();
+            try {
                 classifier.trainFromFile(file);
-                ModelContainer.getInstance().setClassifier(classifier);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ModelContainer.getInstance().setClassifier(classifier);
 
         }
     }

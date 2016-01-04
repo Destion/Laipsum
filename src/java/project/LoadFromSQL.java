@@ -23,6 +23,8 @@ public class LoadFromSQL {
             classifier.saveKnowledgeToFile(new File("./jokes.csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -5,6 +5,7 @@ import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by gerben on 8-12-15.
@@ -22,10 +23,18 @@ public class TestMultipleClasses {
         //Save the classifier data, to test this part of the implementation.
 
         File file = new File("./GerbenIsEenPizza.gov");
-        classifier.saveKnowledgeToFile(file);
+        try {
+            classifier.saveKnowledgeToFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         NaiveBayesClassifier classifier2 = classifier;
         classifier = new NaiveBayesClassifierImplementation();
-        classifier.trainFromFile(file);
+        try {
+            classifier.trainFromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         //Test if it's working.

@@ -11,16 +11,26 @@ import java.io.IOException;
  * Created by Destion on 4-1-2016.
  */
 public class GuiPanel extends JPanel {
-    private BufferedImage img;
-    private static final String IMG_PATH = "src/java/gui/images/MrcQyjj2.png";
+    //private BufferedImage img;
+    //private static final String IMG_PATH = "src/java/gui/images/MrcQyjj2.png";
 
     public GuiPanel(){
         super();
-        try {
-            img = ImageIO.read(new File(IMG_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            //img = ImageIO.read(new File(IMG_PATH));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        this.add(new JButton("Gerben is een koekje"), BorderLayout.EAST);
+        this.add(new JButton("Gerben is een malloot"), BorderLayout.SOUTH);
+
+        String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
+
+        JComboBox cb = new JComboBox(strings);
+        cb.setSelectedIndex(3);
+
+        this.add(cb, BorderLayout.WEST);
 
     }
 

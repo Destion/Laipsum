@@ -28,15 +28,7 @@ public class GuiFrame extends JFrame {
 
         this.add(guiPanel, BorderLayout.CENTER);
 
-        this.add(new JButton("Gerben is een koekje"), BorderLayout.EAST);
-        this.add(new JButton("Gerben is een malloot"), BorderLayout.SOUTH);
 
-        String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
-
-        JComboBox cb = new JComboBox(strings);
-        cb.setSelectedIndex(3);
-
-        this.add(cb, BorderLayout.WEST);
 
         setTitle("Naive Bayes Classifier");
         setJMenuBar(new GuiMenuBar());

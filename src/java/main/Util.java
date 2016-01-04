@@ -33,7 +33,7 @@ public class Util {
     public static File[] promptFiles() {
         //Create a file chooser
         final JFileChooser fc = new JFileChooser("./");
-
+        fc.setMultiSelectionEnabled(true);
         //In response to a button click:
         int returnVal = fc.showOpenDialog(fc);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

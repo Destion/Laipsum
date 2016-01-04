@@ -4,7 +4,9 @@ import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Created by gerben on 4-1-16.
@@ -26,9 +28,13 @@ public class ModelContainer {
         return classifier;
     }
 
-    public void trainFromFiles(File[] inputFiles) throws IOException {
+    public void trainFromFiles(File[] inputFiles, String fileClass) throws IOException {
         for (File file: inputFiles) {
-            classifier.trainFromFile(file);
+            Scanner scanner = new Scanner(new FileInputStream(file));
+            while (scanner.hasNextLine()) {
+                classifier.train(scanner.nextLine(), fileClass);
+            }
+            scanner.close();
         }
     }
 

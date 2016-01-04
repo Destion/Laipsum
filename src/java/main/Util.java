@@ -23,10 +23,22 @@ public class Util {
         //In response to a button click:
         int returnVal = fc.showOpenDialog(fc);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("Opened "+ fc.getSelectedFile());
             return fc.getSelectedFile();
         } else {
-            System.out.println("Something went wrong!");
+            return null;
+        }
+
+    }
+
+    public static File[] promptFiles() {
+        //Create a file chooser
+        final JFileChooser fc = new JFileChooser("./");
+
+        //In response to a button click:
+        int returnVal = fc.showOpenDialog(fc);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            return fc.getSelectedFiles();
+        } else {
             return null;
         }
 

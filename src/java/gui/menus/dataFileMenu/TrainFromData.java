@@ -22,16 +22,14 @@ public class TrainFromData extends JMenuItem implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        File file = Util.promptFile();
-        if (file != null) {
-                NaiveBayesClassifier classifier = new NaiveBayesClassifierImplementation();
+        File[] files = Util.promptFiles();
+        if (files != null) {
             try {
-                classifier.trainFromFile(file);
+                ModelContainer.getInstance().trainFromFiles(files);
             } catch (IOException e1) {
-                Util.showInfoBox("Failed to load classifier from "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
+                Util.showInfoBox("Failed to load classifier from selected files \n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
                 e1.printStackTrace();
             }
-            ModelContainer.getInstance().setClassifier(classifier);
 
         }
     }

@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class GuiPanel extends JPanel {
     private BufferedImage img;
-    private static final String IMG_PATH = "src/java/gui/images/knutselen-met-herfstbladeren.jpg";
+    private static final String IMG_PATH = "src/java/gui/images/MrcQyjj2.png";
 
     public GuiPanel(){
         super();
@@ -31,7 +31,7 @@ public class GuiPanel extends JPanel {
         this.repaint();
         super.paintComponent(g);
         //Draw background image
-        //g.drawImage(img, 0,0, null);
+        g.drawImage(img, 0,0, null);
 
         //Draw actual GUI things (buttons and stuff)
         g.fillRect(0, 0, 100, 100);

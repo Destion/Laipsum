@@ -31,4 +31,12 @@ public class Util {
         }
 
     }
+
+    public static void showInfoBox(String infoMessage, String titleBar) {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static String promptString(String infoMessage, String titleBar) {
+        return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.QUESTION_MESSAGE);
+    }
 }

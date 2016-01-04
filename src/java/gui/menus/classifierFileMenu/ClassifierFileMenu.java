@@ -12,6 +12,7 @@ public class ClassifierFileMenu extends JMenu {
         super("Classifier");
         this.add(new LoadNewClassifier());
         this.add(new LoadToClassifier());
+        this.add(new SaveClassifier());
 
     }
 }

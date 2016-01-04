@@ -28,6 +28,7 @@ public class LoadNewClassifier extends JMenuItem implements ActionListener {
             try {
                 classifier.trainFromFile(file);
             } catch (IOException e1) {
+                Util.showInfoBox("Failed to load classifier from "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
                 e1.printStackTrace();
             }
             ModelContainer.getInstance().setClassifier(classifier);

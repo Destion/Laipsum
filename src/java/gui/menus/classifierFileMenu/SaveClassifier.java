@@ -1,7 +1,5 @@
 package gui.menus.classifierFileMenu;
 
-import classifiers.NaiveBayesClassifier;
-import classifiers.NaiveBayesClassifierImplementation;
 import gui.ModelContainer;
 import main.Util;
 
@@ -14,10 +12,10 @@ import java.io.IOException;
 /**
  * Created by gerben on 4-1-16.
  */
-public class LoadToClassifier extends JMenuItem implements ActionListener {
+public class SaveClassifier extends JMenuItem implements ActionListener {
 
-    public LoadToClassifier() {
-        super("Train current classifier from file");
+    public SaveClassifier() {
+        super("Save classifier to file");
         addActionListener(this);
     }
 
@@ -25,9 +23,10 @@ public class LoadToClassifier extends JMenuItem implements ActionListener {
         File file = Util.promptFile();
         if (file != null) {
             try {
-                ModelContainer.getInstance().getClassifier().trainFromFile(file);
+                ModelContainer.getInstance().getClassifier().saveKnowledgeToFile(file);
+                Util.showInfoBox("Successfully saved classifier to "+ file, "Saving successful");
             } catch (IOException e1) {
-                Util.showInfoBox("Failed to load classifier from "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
+                Util.showInfoBox("Failed to save classifier to "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Saving failed");
                 e1.printStackTrace();
             }
         }

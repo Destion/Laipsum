@@ -90,20 +90,14 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
 
     }
 
-    public void trainFromFile(File inputFile) {
-        try {
-            data.addFromFile(inputFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void trainFromFile(File inputFile) throws IOException {
+        data.addFromFile(inputFile);
 
     }
 
-    public void saveKnowledgeToFile(File outputFile) {
-        try {
+    public void saveKnowledgeToFile(File outputFile) throws IOException {
+
             data.saveToFile(outputFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 }

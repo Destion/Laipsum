@@ -21,6 +21,7 @@ public class GuiPanel extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -29,8 +30,11 @@ public class GuiPanel extends JPanel {
         this.updateUI();
         this.repaint();
         super.paintComponent(g);
-        //Draw
-        g.drawImage(img, 0,0, null);
+        //Draw background image
+        //g.drawImage(img, 0,0, null);
+
+        //Draw actual GUI things (buttons and stuff)
+        g.fillRect(0, 0, 100, 100);
     }
 
 }

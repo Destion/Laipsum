@@ -9,6 +9,18 @@ public class GuiFrame extends JFrame {
 
     public GuiFrame() {
         super();
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         setTitle("Naive Bayes Classifier");
         setJMenuBar(new GuiMenuBar());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

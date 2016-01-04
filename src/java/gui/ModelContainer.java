@@ -8,7 +8,7 @@ import classifiers.NaiveBayesClassifierImplementation;
  */
 public class ModelContainer {
 
-    private NaiveBayesClassifierImplementation classifier;
+    private NaiveBayesClassifier classifier;
 
     private static ModelContainer ourInstance = new ModelContainer();
     public static ModelContainer getInstance() {
@@ -19,7 +19,7 @@ public class ModelContainer {
         classifier = new NaiveBayesClassifierImplementation();
     }
 
-    public NaiveBayesClassifierImplementation getClassifier() {
+    public NaiveBayesClassifier getClassifier() {
         return classifier;
     }
 

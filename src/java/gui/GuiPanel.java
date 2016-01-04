@@ -31,7 +31,7 @@ public class GuiPanel extends JPanel {
         this.repaint();
         super.paintComponent(g);
         //Draw background image
-        g.drawImage(img, 0,0, null);
+        //g.drawImage(img, 0,0, null);
 
         //Draw actual GUI things (buttons and stuff)
         g.fillRect(0, 0, 100, 100);

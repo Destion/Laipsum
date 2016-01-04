@@ -18,7 +18,7 @@ public class Util {
 
     public static File promptFile() {
         //Create a file chooser
-        final JFileChooser fc = new JFileChooser();
+        final JFileChooser fc = new JFileChooser("./");
 
         //In response to a button click:
         int returnVal = fc.showOpenDialog(fc);

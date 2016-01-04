@@ -13,7 +13,6 @@ public class GuiFrame extends JFrame {
     public GuiFrame() {
         super();
 
-
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -25,24 +24,14 @@ public class GuiFrame extends JFrame {
             e.printStackTrace();
         }
 
-
         guiPanel = new GuiPanel();
 
         this.add(guiPanel, BorderLayout.CENTER);
 
-        guiPanel.add(new JButton("Gerben is een koekje"), BorderLayout.EAST);
-        guiPanel.add(new JButton("Gerben is een malloot"), BorderLayout.SOUTH);
 
-        String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
-
-        JComboBox cb = new JComboBox(strings);
-        cb.setSelectedIndex(3);
-
-        this.add(cb, BorderLayout.WEST);
 
         setTitle("Naive Bayes Classifier");
         setJMenuBar(new GuiMenuBar());
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setSize(500,500);

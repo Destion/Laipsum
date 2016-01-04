@@ -1,5 +1,7 @@
 package gui;
 
+import gui.menus.classifierFileMenu.ClassifierFileMenu;
+
 import javax.swing.*;
 
 /**
@@ -7,5 +9,9 @@ import javax.swing.*;
  */
 public class GuiMenuBar extends JMenuBar {
 
+    public GuiMenuBar() {
+        super();
+        add(new ClassifierFileMenu());
+    }
 
 }

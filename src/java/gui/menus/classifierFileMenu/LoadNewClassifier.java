@@ -1,4 +1,4 @@
-package gui.menus.fileMenu;
+package gui.menus.classifierFileMenu;
 
 import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
@@ -17,7 +17,8 @@ import java.io.IOException;
 public class LoadNewClassifier extends JMenuItem implements ActionListener {
 
     public LoadNewClassifier() {
-
+        super("Load new classifier");
+        addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {

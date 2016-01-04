@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class GuiPanel extends JPanel {
     private BufferedImage img;
-    private static final String IMG_PATH = "src/java/gui/knutselen-met-herfstbladeren.jpg";
+    private static final String IMG_PATH = "src/java/gui/images/knutselen-met-herfstbladeren.jpg";
 
     public GuiPanel(){
         super();
@@ -25,8 +25,11 @@ public class GuiPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g){
+        this.removeAll();
+        this.updateUI();
         this.repaint();
         super.paintComponent(g);
+        //Draw
         g.drawImage(img, 0,0, null);
     }
 

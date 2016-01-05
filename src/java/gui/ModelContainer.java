@@ -2,6 +2,7 @@ package gui;
 
 import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
+import gui.mainScreenComponents.GuiTestResultsTable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,7 +46,7 @@ public class ModelContainer {
         }
     }
 
-    public void addListener(GuiTestResultsTable listener) {
+    public void addListener(TestDataListener listener) {
         listeners.add(listener);
     }
 

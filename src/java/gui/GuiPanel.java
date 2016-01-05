@@ -1,11 +1,10 @@
 package gui;
 
-import javax.imageio.ImageIO;
+import gui.mainScreenComponents.ClassSelectionComboBox;
+import gui.mainScreenComponents.GuiTestResultsTable;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Destion on 4-1-2016.
@@ -32,13 +31,7 @@ public class GuiPanel extends JPanel {
         button2Constraints.weightx = 0.5;
 
         JButton button2 = new JButton("Gerben is een malloot");
-        button2.setBackground(new Color	(255, 192, 203));
-        button2.setBorderPainted(false);
-        button2.setFont(new Font("Comic Sans MS", 0, 10));
-        button2.setBorder(null);
         this.add(button2, button2Constraints);
-
-        String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
 
         GridBagConstraints tableConstraints = new GridBagConstraints();
         tableConstraints.gridx = 0;
@@ -49,8 +42,7 @@ public class GuiPanel extends JPanel {
         tableConstraints.fill = GridBagConstraints.BOTH;
         this.add(new GuiTestResultsTable(), tableConstraints);
 
-        JComboBox cb = new JComboBox(strings);
-        cb.setSelectedIndex(3);
+        ClassSelectionComboBox cb = new ClassSelectionComboBox();
 
         GridBagConstraints comboBoxConstraints = new GridBagConstraints();
         comboBoxConstraints.gridx = 2;

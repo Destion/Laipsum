@@ -53,6 +53,26 @@ public class GuiPanel extends JPanel {
 
         this.add(new JTextField(), textFieldConstraints);
 
+        GridBagConstraints button3Constraints = new GridBagConstraints();
+        button3Constraints.gridx = 4;
+        button3Constraints.gridy = 2;
+        button3Constraints.gridwidth = 1;
+        button3Constraints.gridheight = 1;
+        button3Constraints.fill = GridBagConstraints.BOTH;
+
+        this.add(new JButton("Add new joke"), button3Constraints);
+
+        GridBagConstraints cbconstraints = new GridBagConstraints();
+        cbconstraints.gridx = 3;
+        cbconstraints.gridy = 2;
+        cbconstraints.gridwidth = 1;
+        cbconstraints.gridheight = 1;
+        cbconstraints.fill = GridBagConstraints.BOTH;
+
+        ClassSelectionComboBox combo = new ClassSelectionComboBox();
+
+        this.add(combo, cbconstraints);
+
         GridBagConstraints comboBoxConstraints = new GridBagConstraints();
         comboBoxConstraints.gridx = 2;
         comboBoxConstraints.gridy = 0;

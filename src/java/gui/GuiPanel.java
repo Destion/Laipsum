@@ -21,6 +21,7 @@ public class GuiPanel extends JPanel {
         button1Constraints.gridy = 0;
         button1Constraints.gridwidth = 1;
         button1Constraints.gridheight = 1;
+        button1Constraints.weightx = 0.5;
         this.add(new JButton("Gerben is een koekje"), button1Constraints);
 
         GridBagConstraints button2Constraints = new GridBagConstraints();
@@ -28,6 +29,8 @@ public class GuiPanel extends JPanel {
         button2Constraints.gridy = 0;
         button2Constraints.gridwidth = 1;
         button2Constraints.gridheight = 1;
+        button2Constraints.weightx = 0.5;
+
         this.add(new JButton("Gerben is een malloot"), button2Constraints);
 
         String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
@@ -56,6 +59,8 @@ public class GuiPanel extends JPanel {
 
 
     }
+
+
 
 
 }

@@ -12,7 +12,7 @@ public class GuiFrame extends JFrame {
 
     public GuiFrame() {
         super();
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -25,11 +25,7 @@ public class GuiFrame extends JFrame {
         }
 
         guiPanel = new GuiPanel();
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 0;
-        add(guiPanel, c);
+        add(guiPanel, BorderLayout.CENTER);
 
 
         setTitle("Naive Bayes Classifier");

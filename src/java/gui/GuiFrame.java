@@ -27,8 +27,9 @@ public class GuiFrame extends JFrame {
         guiPanel = new GuiPanel();
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        this.add(guiPanel, c);
-
+        c.gridx = 0;
+        c.gridy = 0;
+        add(guiPanel, c);
 
 
         setTitle("Naive Bayes Classifier");

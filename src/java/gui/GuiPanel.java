@@ -32,6 +32,14 @@ public class GuiPanel extends JPanel {
 
         String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
 
+        GridBagConstraints tableConstraints = new GridBagConstraints();
+        tableConstraints.gridx = 0;
+        tableConstraints.gridy = 1;
+        tableConstraints.gridwidth = 3;
+        tableConstraints.gridheight = 1;
+        tableConstraints.weighty = 0.5;
+        tableConstraints.fill = GridBagConstraints.BOTH;
+        this.add(new GuiTestResultsTable(), tableConstraints);
 
         JComboBox cb = new JComboBox(strings);
         cb.setSelectedIndex(3);
@@ -44,14 +52,7 @@ public class GuiPanel extends JPanel {
         this.add(cb, comboBoxConstraints);
 
 
-        GridBagConstraints tableConstraints = new GridBagConstraints();
-        tableConstraints.gridx = 0;
-        tableConstraints.gridy = 1;
-        tableConstraints.gridwidth = 3;
-        tableConstraints.gridheight = 1;
-        tableConstraints.weighty = 0.5;
-        tableConstraints.fill = GridBagConstraints.BOTH;
-        this.add(new GuiTestResultsTable(), tableConstraints);
+
 
 
     }

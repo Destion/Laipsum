@@ -2,32 +2,33 @@ package gui;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 /**
  * Created by gerben on 5-1-16.
  */
-public class GuiTestResultsTable extends JPanel {
+public class GuiTestResultsTable extends JScrollPane {
 
-    private String[] columnHeaders = new String[0];
-    private Object[][] data = new Object[0][];
+    private String[] columnHeaders = new String[1];
+    private Object[][] data = new Object[1][];
     JTable table;
-    JScrollPane scrollPane;
+    DefaultTableModel model;
 
     public GuiTestResultsTable() {
         super();
+        table = new JTable();
+        model = (DefaultTableModel) table.getModel();
+        model.setDataVector(data, columnHeaders);
         updateTable();
-        setLayout(new GridBagLayout());
         ModelContainer.getInstance().setListener(this);
+        setViewportView(table);
 
     }
 
     public void updateTable() {
-        if (table != null) {
-            remove(table.getTableHeader());
-            scrollPane.remove(table);
-            remove(scrollPane);
-        }
+
         data = ModelContainer.getInstance().getTestData();
         columnHeaders = new String[ModelContainer.getInstance().getClassifier().getClassNames().length + 1];
         columnHeaders[0] = "ClassName ->";
@@ -35,27 +36,9 @@ public class GuiTestResultsTable extends JPanel {
                 , 0, columnHeaders, 1
                 , columnHeaders.length - 1
         );
-        table = new JTable(data, columnHeaders);
-        table.setFillsViewportHeight(true);
+        model.setDataVector(data, columnHeaders);
+        model.fireTableDataChanged();
 
-        GridBagConstraints tableHeaderConstraints = new GridBagConstraints();
-        tableHeaderConstraints.gridx = 0;
-        tableHeaderConstraints.gridy = 0;
-        tableHeaderConstraints.gridwidth = 1;
-        tableHeaderConstraints.gridheight = 1;
-        tableHeaderConstraints.weighty = 0;
-        add(table.getTableHeader(), tableHeaderConstraints);
-        scrollPane = new JScrollPane(table);
-
-        GridBagConstraints tableConstraints = new GridBagConstraints();
-        tableConstraints.gridx = 0;
-        tableConstraints.gridy = 1;
-        tableConstraints.gridwidth = 1;
-        tableConstraints.gridheight = 1;
-        tableConstraints.weighty = 0.5;
-        add(scrollPane, tableConstraints);
-        setVisible(false);
-        setVisible(true);
     }
 
 }

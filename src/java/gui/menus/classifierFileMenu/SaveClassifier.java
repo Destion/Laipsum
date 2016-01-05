@@ -20,7 +20,7 @@ public class SaveClassifier extends JMenuItem implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        File file = Util.promptFile();
+        File file = Util.promptFile(true);
         if (file != null) {
             try {
                 ModelContainer.getInstance().getClassifier().saveKnowledgeToFile(file);

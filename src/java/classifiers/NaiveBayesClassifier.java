@@ -45,5 +45,5 @@ public interface NaiveBayesClassifier {
     void saveKnowledgeToFile(File outputFile) throws IOException;
 
 
-
+    String[] getClassNames();
 }

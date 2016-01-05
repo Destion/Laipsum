@@ -23,16 +23,18 @@ public class TrainFromData extends JMenuItem implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         File[] files = Util.promptFiles();
-        String className = Util.promptString("The name of the class", "Load Data");
         if (files != null) {
+            String className = Util.promptString("The name of the class", "Load Data");
             try {
-                ModelContainer.getInstance().trainFromFiles(files ,className);
+                ModelContainer.getInstance().trainFromFiles(files, className);
+                ModelContainer.getInstance().updateTable();
             } catch (IOException e1) {
                 Util.showInfoBox("Failed to load classifier from selected files \n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
                 e1.printStackTrace();
             }
 
         }
+
     }
 
 }

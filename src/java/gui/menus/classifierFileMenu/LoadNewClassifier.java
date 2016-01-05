@@ -27,11 +27,14 @@ public class LoadNewClassifier extends JMenuItem implements ActionListener {
                 NaiveBayesClassifier classifier = new NaiveBayesClassifierImplementation();
             try {
                 classifier.trainFromFile(file);
+                ModelContainer.getInstance().setClassifier(classifier);
+                ModelContainer.getInstance().updateTable();
             } catch (IOException e1) {
                 Util.showInfoBox("Failed to load classifier from "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
                 e1.printStackTrace();
             }
-            ModelContainer.getInstance().setClassifier(classifier);
+
+
 
         }
     }

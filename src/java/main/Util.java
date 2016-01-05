@@ -17,11 +17,17 @@ public class Util {
     }
 
     public static File promptFile() {
+        return promptFile(false);
+    }
+    public static File promptFile(boolean save) {
         //Create a file chooser
         final JFileChooser fc = new JFileChooser("./");
-
-        //In response to a button click:
-        int returnVal = fc.showOpenDialog(fc);
+        int returnVal;
+        if (save) {
+            returnVal = fc.showSaveDialog(fc);
+        } else {
+            returnVal = fc.showOpenDialog(fc);
+        }
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             return fc.getSelectedFile();
         } else {
@@ -34,6 +40,7 @@ public class Util {
         //Create a file chooser
         final JFileChooser fc = new JFileChooser("./");
         fc.setMultiSelectionEnabled(true);
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         //In response to a button click:
         int returnVal = fc.showOpenDialog(fc);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

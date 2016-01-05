@@ -12,7 +12,7 @@ public class GuiFrame extends JFrame {
 
     public GuiFrame() {
         super();
-
+        setLayout(new GridBagLayout());
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -25,8 +25,9 @@ public class GuiFrame extends JFrame {
         }
 
         guiPanel = new GuiPanel();
-
-        this.add(guiPanel, BorderLayout.CENTER);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        this.add(guiPanel, c);
 
 
 
@@ -34,7 +35,6 @@ public class GuiFrame extends JFrame {
         setJMenuBar(new GuiMenuBar());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
-        setSize(500,500);
         setVisible(true);
 
 

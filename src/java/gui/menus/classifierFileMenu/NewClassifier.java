@@ -24,6 +24,8 @@ public class NewClassifier extends JMenuItem implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         NaiveBayesClassifier classifier = new NaiveBayesClassifierImplementation();
         ModelContainer.getInstance().setClassifier(classifier);
+        ModelContainer.getInstance().updateTable();
+
     }
 
 }

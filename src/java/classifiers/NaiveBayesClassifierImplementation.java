@@ -100,4 +100,9 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
             data.saveToFile(outputFile);
 
     }
+
+    @Override
+    public String[] getClassNames() {
+        return data.getClasses();
+    }
 }

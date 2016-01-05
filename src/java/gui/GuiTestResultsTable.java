@@ -3,16 +3,13 @@ package gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import java.awt.*;
 
 /**
  * Created by gerben on 5-1-16.
  */
-public class GuiTestResultsTable extends JScrollPane {
-
-    private String[] columnHeaders = new String[1];
-    private Object[][] data = new Object[1][];
+public class GuiTestResultsTable extends JScrollPane implements TestDataListener {
+    private String[] columnHeaders = new String[0];
+    private Object[][] data = new Object[0][];
     JTable table;
     DefaultTableModel model;
 
@@ -21,13 +18,12 @@ public class GuiTestResultsTable extends JScrollPane {
         table = new JTable();
         model = (DefaultTableModel) table.getModel();
         model.setDataVector(data, columnHeaders);
-        updateTable();
-        ModelContainer.getInstance().setListener(this);
+        ModelContainer.getInstance().addListener(this);
         setViewportView(table);
 
     }
 
-    public void updateTable() {
+    public void onTestDataUpdate() {
 
         data = ModelContainer.getInstance().getTestData();
         columnHeaders = new String[ModelContainer.getInstance().getClassifier().getClassNames().length + 1];

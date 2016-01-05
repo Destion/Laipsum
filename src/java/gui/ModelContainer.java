@@ -6,9 +6,7 @@ import classifiers.NaiveBayesClassifierImplementation;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by gerben on 4-1-16.
@@ -18,7 +16,7 @@ public class ModelContainer {
     private NaiveBayesClassifier classifier;
     private Map<String, Map<String, Integer>> testData = new HashMap<>();
 
-    private GuiTestResultsTable listener = null;
+    private List<TestDataListener> listeners = new ArrayList<>();
 
     private static ModelContainer ourInstance = new ModelContainer();
     public static ModelContainer getInstance() {
@@ -47,13 +45,13 @@ public class ModelContainer {
         }
     }
 
-    public void setListener(GuiTestResultsTable listener) {
-        this.listener = listener;
+    public void addListener(GuiTestResultsTable listener) {
+        listeners.add(listener);
     }
 
     public void updateTable(){
-        if (listener != null) {
-            listener.updateTable();
+        for (TestDataListener listener: listeners) {
+            listener.onTestDataUpdate();
         }
     }
 

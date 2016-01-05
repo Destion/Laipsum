@@ -14,7 +14,7 @@ public class GuiPanel extends JPanel {
     public GuiPanel(){
         super();
         setLayout(new GridBagLayout());
-//
+
         GridBagConstraints button1Constraints = new GridBagConstraints();
         button1Constraints.gridx = 0;
         button1Constraints.gridy = 0;
@@ -43,6 +43,15 @@ public class GuiPanel extends JPanel {
         this.add(new GuiTestResultsTable(), tableConstraints);
 
         ClassSelectionComboBox cb = new ClassSelectionComboBox();
+
+        GridBagConstraints textFieldConstraints = new GridBagConstraints();
+        textFieldConstraints.gridx = 0;
+        textFieldConstraints.gridy = 2;
+        textFieldConstraints.gridwidth = 3;
+        textFieldConstraints.gridheight = 1;
+        textFieldConstraints.fill = GridBagConstraints.BOTH;
+
+        this.add(new JTextField(), textFieldConstraints);
 
         GridBagConstraints comboBoxConstraints = new GridBagConstraints();
         comboBoxConstraints.gridx = 2;

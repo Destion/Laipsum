@@ -30,7 +30,7 @@ public class GuiPanel extends JPanel {
         button2Constraints.gridheight = 1;
         button2Constraints.weightx = 0.5;
 
-        JButton button2 = new JButton("Gerben is een malloot");
+        JButton button2 = new JButton("Mick is een malloot");
         this.add(button2, button2Constraints);
 
         GridBagConstraints tableConstraints = new GridBagConstraints();

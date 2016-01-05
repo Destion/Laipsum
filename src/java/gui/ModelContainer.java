@@ -4,6 +4,7 @@ import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
 import gui.mainScreenComponents.GuiTestResultsTable;
 
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,7 +16,10 @@ import java.util.*;
 public class ModelContainer {
 
     private NaiveBayesClassifier classifier;
+    PropertyChangeListener propertyChangeListener;
     private Map<String, Map<String, Integer>> testData = new HashMap<>();
+
+    private Map<String, String> testCases = new HashMap<>();
 
     private List<TestDataListener> listeners = new ArrayList<>();
 
@@ -33,13 +37,36 @@ public class ModelContainer {
     }
 
     public void trainFromFiles(File[] inputFiles, String fileClass) throws IOException {
+        trainOrTestFromFiles(inputFiles, fileClass, true);
+    }
+
+    public void testFromFiles(File[] inputFiles, String fileClass) throws IOException {
+        trainOrTestFromFiles(inputFiles, fileClass, false);
+    }
+
+    public void setPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeListener = listener;
+    }
+    public void runAutomatedTest() {
+        if (propertyChangeListener != null) {
+            TestTask testTask = new TestTask();
+            testTask.addPropertyChangeListener(propertyChangeListener);
+            testTask.execute();
+        }
+    }
+
+    public void trainOrTestFromFiles(File[] inputFiles, String fileClass, boolean train) throws IOException {
         for (File file: inputFiles) {
             if (file.isDirectory()) {
-                trainFromFiles(file.listFiles(), fileClass);
+                trainOrTestFromFiles(file.listFiles(), fileClass, train);
             } else {
                 Scanner scanner = new Scanner(new FileInputStream(file));
                 while (scanner.hasNextLine()) {
-                    classifier.train(scanner.nextLine(), fileClass);
+                    if (train) {
+                        classifier.train(scanner.nextLine(), fileClass);
+                    } else {
+                        testCases.put(scanner.nextLine(), fileClass);
+                    }
                 }
                 scanner.close();
             }
@@ -102,5 +129,9 @@ public class ModelContainer {
 
     public void setClassifier(NaiveBayesClassifier classifier) {
         this.classifier = classifier;
+    }
+
+    public Map<String, String> getTestCases() {
+        return testCases;
     }
 }

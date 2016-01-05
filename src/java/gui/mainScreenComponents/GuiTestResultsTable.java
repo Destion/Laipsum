@@ -19,6 +19,7 @@ public class GuiTestResultsTable extends JScrollPane implements TestDataListener
     public GuiTestResultsTable() {
         super();
         table = new JTable();
+        table.setModel(new TableModel());
         model = (DefaultTableModel) table.getModel();
         model.setDataVector(data, columnHeaders);
         ModelContainer.getInstance().addListener(this);

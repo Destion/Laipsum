@@ -31,7 +31,12 @@ public class GuiPanel extends JPanel {
         button2Constraints.gridheight = 1;
         button2Constraints.weightx = 0.5;
 
-        this.add(new JButton("Gerben is een malloot"), button2Constraints);
+        JButton button2 = new JButton("Gerben is een malloot");
+        button2.setBackground(new Color	(255, 192, 203));
+        button2.setBorderPainted(false);
+        button2.setFont(new Font("Comic Sans MS", 0, 10));
+        button2.setBorder(null);
+        this.add(button2, button2Constraints);
 
         String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
 

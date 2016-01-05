@@ -33,7 +33,9 @@ public class GuiPanel extends JPanel {
 
         JButton button2 = new JButton("Gerben is een malloot");
         button2.setBackground(new Color	(255, 192, 203));
-
+        button2.setBorderPainted(false);
+        button2.setFont(new Font("Comic Sans MS", 0, 10));
+        button2.setBorder(null);
         this.add(button2, button2Constraints);
 
         String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};

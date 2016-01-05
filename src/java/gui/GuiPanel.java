@@ -15,7 +15,7 @@ public class GuiPanel extends JPanel {
     public GuiPanel(){
         super();
         setLayout(new GridBagLayout());
-//
+
         GridBagConstraints button1Constraints = new GridBagConstraints();
         button1Constraints.gridx = 0;
         button1Constraints.gridy = 0;
@@ -32,10 +32,6 @@ public class GuiPanel extends JPanel {
         button2Constraints.weightx = 0.5;
 
         JButton button2 = new JButton("Gerben is een malloot");
-        button2.setBackground(new Color	(255, 192, 203));
-        button2.setBorderPainted(false);
-        button2.setFont(new Font("Comic Sans MS", 0, 10));
-        button2.setBorder(null);
         this.add(button2, button2Constraints);
 
         String[] strings = {"Gerben", "Pizza", "Koekjes", "Macfags"};
@@ -51,6 +47,15 @@ public class GuiPanel extends JPanel {
 
         JComboBox cb = new JComboBox(strings);
         cb.setSelectedIndex(3);
+
+        GridBagConstraints textFieldConstraints = new GridBagConstraints();
+        textFieldConstraints.gridx = 0;
+        textFieldConstraints.gridy = 2;
+        textFieldConstraints.gridwidth = 3;
+        textFieldConstraints.gridheight = 1;
+        textFieldConstraints.fill = GridBagConstraints.BOTH;
+
+        this.add(new JTextField(), textFieldConstraints);
 
         GridBagConstraints comboBoxConstraints = new GridBagConstraints();
         comboBoxConstraints.gridx = 2;

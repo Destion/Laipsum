@@ -37,6 +37,7 @@ public class AdditionListener implements ActionListener {
             System.out.println(tf.getText());
             System.out.println((String) cb.getSelectedItem());
             nbc.train(tf.getText(), (String) cb.getSelectedItem());
+            tf.setText("");
         }
     }
 }

@@ -158,4 +158,8 @@ public class ModelContainer implements PropertyChangeListener{
             isTestRunning = (boolean) evt.getNewValue();
         }
     }
+
+    public Map<String, Map<String, Integer>> getTestDataMap() {
+        return testData;
+    }
 }

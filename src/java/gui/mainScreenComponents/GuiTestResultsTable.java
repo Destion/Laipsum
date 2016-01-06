@@ -31,7 +31,7 @@ public class GuiTestResultsTable extends JScrollPane implements TestDataListener
 
         data = ModelContainer.getInstance().getTestData();
         columnHeaders = new String[ModelContainer.getInstance().getClassifier().getClassNames().length + 1];
-        columnHeaders[0] = "ClassName ->";
+        columnHeaders[0] = "ClassName / Classified as ->";
         System.arraycopy(ModelContainer.getInstance().getClassifier().getClassNames()
                 , 0, columnHeaders, 1
                 , columnHeaders.length - 1

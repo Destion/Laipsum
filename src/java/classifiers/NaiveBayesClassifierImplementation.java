@@ -21,6 +21,9 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
     public String getClass(String text) {
         String[] normalized = normalize(text);
         String[] classes = data.getClasses();
+        if (classes.length == 0) {
+            return null;
+        }
         double[] logPropabilities = new double[classes.length];
         for (int i = 0; i < classes.length; i++) {
             String c = classes[i];

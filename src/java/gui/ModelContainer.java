@@ -142,7 +142,10 @@ public class ModelContainer implements PropertyChangeListener{
     }
 
     public void setClassifier(NaiveBayesClassifier classifier) {
+
         this.classifier = classifier;
+        this.testData.clear();
+        this.testCases.clear();
     }
 
     public Map<String, String> getTestCases() {

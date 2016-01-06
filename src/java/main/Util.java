@@ -57,6 +57,10 @@ public class Util {
     }
 
     public static String promptString(String infoMessage, String titleBar) {
-        return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.QUESTION_MESSAGE);
+        String s = JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.QUESTION_MESSAGE);
+        if (s.equals("")){
+            return null;
+        }
+        return s;
     }
 }

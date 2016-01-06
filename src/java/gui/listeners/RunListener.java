@@ -2,6 +2,7 @@ package gui.listeners;
 
 import gui.ModelContainer;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,12 +11,16 @@ import java.awt.event.ActionListener;
  */
 public class RunListener implements ActionListener {
 
-    public RunListener(){
+    private JButton button;
+
+    public RunListener(JButton button){
         super();
+        this.button = button;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        button.setEnabled(false);
         ModelContainer.getInstance().runAutomatedTest();
         ModelContainer.getInstance().updateTable();
     }

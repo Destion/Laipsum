@@ -19,9 +19,14 @@ public class AddClassButton extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ModelContainer.getInstance().getClassifier().addClass(
-                Util.promptString("Class name: ", "Add class")
-        );
-        ModelContainer.getInstance().updateTable();
+
+        String s = Util.promptString("Class name: ", "Add class");
+
+        if (s != null) {
+            ModelContainer.getInstance().getClassifier().addClass(s);
+            ModelContainer.getInstance().updateTable();
+        } else {
+            Util.showInfoBox("Invalid classname", "Error!");
+        }
     }
 }

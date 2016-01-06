@@ -1,4 +1,4 @@
-package gui;
+package gui.listeners;
 
 import classifiers.NaiveBayesClassifier;
 import gui.mainScreenComponents.ClassSelectionComboBox;

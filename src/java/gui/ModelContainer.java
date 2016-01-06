@@ -3,6 +3,7 @@ package gui;
 import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,10 +13,10 @@ import java.util.*;
 /**
  * Created by gerben on 4-1-16.
  */
-public class ModelContainer {
+public class ModelContainer implements PropertyChangeListener{
 
     private NaiveBayesClassifier classifier;
-    private PropertyChangeListener propertyChangeListener;
+    private List<PropertyChangeListener> propertyChangeListeners = new ArrayList<>();
     private TestTask currentTask;
     private Map<String, Map<String, Integer>> testData = new HashMap<>();
 
@@ -24,6 +25,7 @@ public class ModelContainer {
     private List<TestDataListener> listeners = new ArrayList<>();
 
     private static ModelContainer ourInstance = new ModelContainer();
+    private boolean isTestRunning = false;
 
     public static ModelContainer getInstance() {
         return ourInstance;
@@ -31,6 +33,7 @@ public class ModelContainer {
 
     private ModelContainer() {
         classifier = new NaiveBayesClassifierImplementation();
+        propertyChangeListeners.add(this);
     }
 
     public NaiveBayesClassifier getClassifier() {
@@ -45,15 +48,17 @@ public class ModelContainer {
         trainOrTestFromFiles(inputFiles, fileClass, false);
     }
 
-    public void setPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeListener = listener;
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeListeners.add(listener);
     }
 
 
     public void runAutomatedTest() {
-        if (propertyChangeListener != null) {
+        if (propertyChangeListeners != null) {
             currentTask = new TestTask();
-            currentTask.addPropertyChangeListener(propertyChangeListener);
+            for (PropertyChangeListener propertyChangeListener: propertyChangeListeners) {
+                currentTask.addPropertyChangeListener(propertyChangeListener);
+            }
             currentTask.execute();
         }
     }
@@ -110,8 +115,10 @@ public class ModelContainer {
     }
 
     public boolean isTestRunning() {
-        return currentTask != null && !currentTask.isDone();
+        return isTestRunning;
     }
+
+
 
     public Object[][] getTestData() {
         String[] classNames = classifier.getClassNames();
@@ -140,5 +147,12 @@ public class ModelContainer {
 
     public Map<String, String> getTestCases() {
         return testCases;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("active")) {
+            isTestRunning = (boolean) evt.getNewValue();
+        }
     }
 }

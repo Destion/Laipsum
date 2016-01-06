@@ -102,7 +102,7 @@ public class GuiPanel extends JPanel {
         progressBarConstraints.fill = GridBagConstraints.BOTH;
 
         TestProgressBar progressBar = new TestProgressBar();
-        ModelContainer.getInstance().setPropertyChangeListener(progressBar);
+        ModelContainer.getInstance().addPropertyChangeListener(progressBar);
         add(progressBar, progressBarConstraints);
 
     }

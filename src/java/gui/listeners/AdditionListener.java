@@ -14,26 +14,23 @@ public class AdditionListener implements ActionListener {
 
     JTextField tf;
     ClassSelectionComboBox cb;
-    NaiveBayesClassifier nbc;
 
-    public AdditionListener(JTextField tf, ClassSelectionComboBox cb, NaiveBayesClassifier nbc) {
+    public AdditionListener(JTextField tf, ClassSelectionComboBox cb) {
         super();
         this.tf = tf;
         this.cb = cb;
-        this.nbc = nbc;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        NaiveBayesClassifier nbc = ModelContainer.getInstance().getClassifier();
         boolean valid = true;
 
         if (tf.getText().equals("") || cb.getSelectedItem() == null) {
             valid = false;
         }
 
-        if (valid) {
-            System.out.println(tf.getText());
-            System.out.println((String) cb.getSelectedItem());
+        if (valid){
             nbc.train(tf.getText(), (String) cb.getSelectedItem());
             tf.setText("");
         }

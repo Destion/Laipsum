@@ -1,6 +1,7 @@
 package gui;
 
 import gui.listeners.AdditionListener;
+import gui.listeners.ExpectationListener;
 import gui.listeners.RunListener;
 import gui.mainScreenComponents.AddClassButton;
 import gui.mainScreenComponents.ClassSelectionComboBox;
@@ -25,9 +26,7 @@ public class GuiPanel extends JPanel {
         button1Constraints.gridwidth = 1;
         button1Constraints.gridheight = 1;
         button1Constraints.weightx = 0.5;
-        JButton button1 = new JButton("Run testqueueueueueueue");
-        button1.setFont(new Font("Arial",0, 11));
-        button1.setBackground(new Color(0, 0, 0));
+        JButton button1 = new JButton("Run testqueue");
         RunListener runL = new RunListener(button1);
         ModelContainer.getInstance().addPropertyChangeListener(runL);
         button1.addActionListener(runL);
@@ -86,7 +85,7 @@ public class GuiPanel extends JPanel {
         this.add(combo, cbconstraints);
 
         GridBagConstraints button3Constraints = new GridBagConstraints();
-        button3Constraints.gridx = 5;
+        button3Constraints.gridx = 4;
         button3Constraints.gridy = 2;
         button3Constraints.gridwidth = 1;
         button3Constraints.gridheight = 1;
@@ -109,6 +108,17 @@ public class GuiPanel extends JPanel {
         TestProgressBar progressBar = new TestProgressBar();
         ModelContainer.getInstance().addPropertyChangeListener(progressBar);
         add(progressBar, progressBarConstraints);
+
+        GridBagConstraints button4Constraints = new GridBagConstraints();
+        button4Constraints.gridx = 5;
+        button4Constraints.gridy = 2;
+        button4Constraints.gridwidth = 1;
+        button4Constraints.gridheight = 1;
+        button4Constraints.fill = GridBagConstraints.BOTH;
+
+        JButton button4 = new JButton("Check expected class");
+        button4.addActionListener(new ExpectationListener(tf));
+        this.add(button4, button4Constraints);
 
     }
 

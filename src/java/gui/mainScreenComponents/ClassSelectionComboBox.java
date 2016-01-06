@@ -1,7 +1,7 @@
 package gui.mainScreenComponents;
 
 import gui.ModelContainer;
-import gui.TestDataListener;
+import gui.listeners.TestDataListener;
 
 import javax.swing.*;
 

@@ -13,6 +13,7 @@ public class TestResultsView extends JLabel implements PropertyChangeListener {
 
     public TestResultsView() {
         super("No test results available yet");
+        ModelContainer.getInstance().addPropertyChangeListener(this);
     }
 
     @Override
@@ -22,13 +23,13 @@ public class TestResultsView extends JLabel implements PropertyChangeListener {
             int right = 0;
             for (String className: ModelContainer.getInstance().getTestDataMap().keySet()) {
                 for(String classGuessed : ModelContainer.getInstance().getTestDataMap().get(className).keySet()) {
-                    total++;
+                    total += ModelContainer.getInstance().getTestResult(className, classGuessed);
                     if (classGuessed.equals(className)) {
-                        right++;
+                        right += ModelContainer.getInstance().getTestResult(className, classGuessed);
                     }
                 }
             }
-            setText(String.format("Right: %d, wrong: %d, total: %d", right, total - right, total));
+            setText(String.format("Right: %d, total: %d", right, total));
         }
     }
 }

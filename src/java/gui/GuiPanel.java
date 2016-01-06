@@ -3,10 +3,7 @@ package gui;
 import gui.listeners.AdditionListener;
 import gui.listeners.ExpectationListener;
 import gui.listeners.RunListener;
-import gui.mainScreenComponents.AddClassButton;
-import gui.mainScreenComponents.ClassSelectionComboBox;
-import gui.mainScreenComponents.GuiTestResultsTable;
-import gui.mainScreenComponents.TestProgressBar;
+import gui.mainScreenComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +31,7 @@ public class GuiPanel extends JPanel {
         this.add(button1, button1Constraints);
 
         GridBagConstraints button2Constraints = new GridBagConstraints();
-        button2Constraints.gridx = 3;
+        button2Constraints.gridx = 1;
         button2Constraints.gridy = 0;
         button2Constraints.gridwidth = 1;
         button2Constraints.gridheight = 1;
@@ -42,6 +39,16 @@ public class GuiPanel extends JPanel {
 
         AddClassButton button2 = new AddClassButton();
         this.add(button2, button2Constraints);
+
+        GridBagConstraints button31Constraints = new GridBagConstraints();
+        button31Constraints.gridx = 2;
+        button31Constraints.gridy = 0;
+        button31Constraints.gridwidth = 1;
+        button31Constraints.gridheight = 1;
+        button31Constraints.weightx = 0.5;
+
+        FillInFromTestDataButton button31 = new FillInFromTestDataButton();
+        this.add(button31, button31Constraints);
 
         GridBagConstraints tableConstraints = new GridBagConstraints();
         tableConstraints.gridx = 0;
@@ -52,14 +59,14 @@ public class GuiPanel extends JPanel {
         tableConstraints.fill = GridBagConstraints.BOTH;
         this.add(new GuiTestResultsTable(), tableConstraints);
 
-        ClassSelectionComboBox cb = new ClassSelectionComboBox();
+        TestResultsView resultsView = new TestResultsView();
 
         GridBagConstraints comboBoxConstraints = new GridBagConstraints();
-        comboBoxConstraints.gridx = 5;
+        comboBoxConstraints.gridx = 3;
         comboBoxConstraints.gridy = 0;
-        comboBoxConstraints.gridwidth = 1;
+        comboBoxConstraints.gridwidth = 2;
         comboBoxConstraints.gridheight = 1;
-        this.add(cb, comboBoxConstraints);
+        this.add(resultsView, comboBoxConstraints);
 
 
         GridBagConstraints textFieldConstraints = new GridBagConstraints();
@@ -68,7 +75,7 @@ public class GuiPanel extends JPanel {
         textFieldConstraints.gridwidth = 3;
         textFieldConstraints.gridheight = 1;
         textFieldConstraints.fill = GridBagConstraints.BOTH;
-        JTextField tf = new JTextField();
+        JTextField tf = new GuiTextField();
         tf.setToolTipText("Please enter the string you want to add to the " +
                 "classifier.");
         this.add(tf, textFieldConstraints);
@@ -94,7 +101,7 @@ public class GuiPanel extends JPanel {
 
         JButton button3 = new JButton("Add");
 
-        button3.addActionListener(new AdditionListener(tf, cb));
+        button3.addActionListener(new AdditionListener(tf, combo));
         this.add(button3, button3Constraints);
 
         GridBagConstraints progressBarConstraints = new GridBagConstraints();

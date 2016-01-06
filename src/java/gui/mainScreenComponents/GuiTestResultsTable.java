@@ -2,7 +2,7 @@ package gui.mainScreenComponents;
 
 
 import gui.ModelContainer;
-import gui.TestDataListener;
+import gui.listeners.TestDataListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

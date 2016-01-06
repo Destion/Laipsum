@@ -2,6 +2,9 @@ package gui;
 
 import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
+import gui.listeners.TestCaseListener;
+import gui.listeners.TestDataListener;
+import gui.mainScreenComponents.GuiTextField;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,6 +29,7 @@ public class ModelContainer implements PropertyChangeListener{
 
     private static ModelContainer ourInstance = new ModelContainer();
     private boolean isTestRunning = false;
+    private TestCaseListener testCaseListener;
 
     public static ModelContainer getInstance() {
         return ourInstance;
@@ -119,6 +123,15 @@ public class ModelContainer implements PropertyChangeListener{
     }
 
 
+    public void pushTest() {
+        if (testCases.size() != 0) {
+            String sentence = testCases.keySet().iterator().next();
+            String className = testCases.get(sentence);
+            testCases.remove(sentence);
+            testCaseListener.onTestCasePushed(sentence, className);
+        }
+    }
+
 
     public Object[][] getTestData() {
         String[] classNames = classifier.getClassNames();
@@ -161,5 +174,9 @@ public class ModelContainer implements PropertyChangeListener{
 
     public Map<String, Map<String, Integer>> getTestDataMap() {
         return testData;
+    }
+
+    public void setTestCaseListener(GuiTextField testCaseListener) {
+        this.testCaseListener = testCaseListener;
     }
 }

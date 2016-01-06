@@ -12,7 +12,6 @@ public class DataFileMenu extends JMenu {
         super("Data");
         this.add(new TrainFromData());
         this.add(new AddTestData());
-        this.add(new RunAutomatedTest());
-
+        //this.add(new RunAutomatedTest());
     }
 }

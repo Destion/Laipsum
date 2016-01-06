@@ -1,5 +1,7 @@
 package gui;
 
+import gui.listeners.AdditionListener;
+import gui.listeners.RunListener;
 import gui.mainScreenComponents.AddClassButton;
 import gui.mainScreenComponents.ClassSelectionComboBox;
 import gui.mainScreenComponents.GuiTestResultsTable;
@@ -23,7 +25,9 @@ public class GuiPanel extends JPanel {
         button1Constraints.gridwidth = 1;
         button1Constraints.gridheight = 1;
         button1Constraints.weightx = 0.5;
-        this.add(new JButton("Gerben is een koekje"), button1Constraints);
+        JButton button1 = new JButton("Run testqueueueueueueue");
+        button1.addActionListener(new RunListener());
+        this.add(button1, button1Constraints);
 
         GridBagConstraints button2Constraints = new GridBagConstraints();
         button2Constraints.gridx = 3;
@@ -61,7 +65,8 @@ public class GuiPanel extends JPanel {
         textFieldConstraints.gridheight = 1;
         textFieldConstraints.fill = GridBagConstraints.BOTH;
         JTextField tf = new JTextField();
-
+        tf.setToolTipText("Please enter the string you want to add to the " +
+                "classifier.");
         this.add(tf, textFieldConstraints);
 
         GridBagConstraints cbconstraints = new GridBagConstraints();

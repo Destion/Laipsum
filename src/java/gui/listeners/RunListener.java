@@ -1,28 +1,22 @@
-package gui.menus.dataFileMenu;
+package gui.listeners;
 
 import gui.ModelContainer;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by gerben on 4-1-16.
+ * Created by Destion on 6-1-2016.
  */
-@Deprecated
-public class RunAutomatedTest extends JMenuItem implements ActionListener {
+public class RunListener implements ActionListener {
 
-    public RunAutomatedTest() {
-        super("Run test");
-        addActionListener(this);
+    public RunListener(){
+        super();
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-
         ModelContainer.getInstance().runAutomatedTest();
         ModelContainer.getInstance().updateTable();
-
-
     }
-
 }

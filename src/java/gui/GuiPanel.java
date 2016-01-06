@@ -26,7 +26,12 @@ public class GuiPanel extends JPanel {
         button1Constraints.gridheight = 1;
         button1Constraints.weightx = 0.5;
         JButton button1 = new JButton("Run testqueueueueueueue");
-        button1.addActionListener(new RunListener(button1));
+        button1.setFont(new Font("Arial",0, 11));
+        button1.setBackground(new Color(0, 0, 0));
+        RunListener runL = new RunListener(button1);
+        ModelContainer.getInstance().addPropertyChangeListener(runL);
+        button1.addActionListener(runL);
+
         this.add(button1, button1Constraints);
 
         GridBagConstraints button2Constraints = new GridBagConstraints();

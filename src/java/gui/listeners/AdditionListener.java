@@ -1,6 +1,6 @@
 package gui.listeners;
 
-import classifiers.NaiveBayesClassifier;
+import gui.ModelContainer;
 import gui.mainScreenComponents.ClassSelectionComboBox;
 
 import javax.swing.*;
@@ -23,7 +23,6 @@ public class AdditionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        NaiveBayesClassifier nbc = ModelContainer.getInstance().getClassifier();
         boolean valid = true;
 
         if (tf.getText().equals("") || cb.getSelectedItem() == null) {
@@ -31,7 +30,7 @@ public class AdditionListener implements ActionListener {
         }
 
         if (valid){
-            nbc.train(tf.getText(), (String) cb.getSelectedItem());
+            ModelContainer.getInstance().getClassifier().train(tf.getText(), (String) cb.getSelectedItem());
             tf.setText("");
         }
     }

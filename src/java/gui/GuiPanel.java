@@ -3,6 +3,7 @@ package gui;
 import data.NaiveBayesTrainingDataImplementation;
 import gui.mainScreenComponents.ClassSelectionComboBox;
 import gui.mainScreenComponents.GuiTestResultsTable;
+import gui.mainScreenComponents.TestProgressBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -88,6 +89,18 @@ public class GuiPanel extends JPanel {
 
         button3.addActionListener(new AdditionListener(tf, cb, ModelContainer.getInstance().getClassifier()));
         this.add(button3, button3Constraints);
+
+        GridBagConstraints progressBarConstraints = new GridBagConstraints();
+        progressBarConstraints.gridx = 0;
+        progressBarConstraints.gridy = 3;
+        progressBarConstraints.gridwidth = 10;
+        progressBarConstraints.gridheight = 1;
+        progressBarConstraints.weightx = 0.5;
+        progressBarConstraints.fill = GridBagConstraints.BOTH;
+
+        TestProgressBar progressBar = new TestProgressBar();
+        ModelContainer.getInstance().setPropertyChangeListener(progressBar);
+        add(progressBar, progressBarConstraints);
 
     }
 

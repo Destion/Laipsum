@@ -16,7 +16,8 @@ import java.util.*;
 public class ModelContainer {
 
     private NaiveBayesClassifier classifier;
-    PropertyChangeListener propertyChangeListener;
+    private PropertyChangeListener propertyChangeListener;
+    private TestTask currentTask;
     private Map<String, Map<String, Integer>> testData = new HashMap<>();
 
     private Map<String, String> testCases = new HashMap<>();
@@ -47,11 +48,13 @@ public class ModelContainer {
     public void setPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeListener = listener;
     }
+
+
     public void runAutomatedTest() {
         if (propertyChangeListener != null) {
-            TestTask testTask = new TestTask();
-            testTask.addPropertyChangeListener(propertyChangeListener);
-            testTask.execute();
+            currentTask = new TestTask();
+            currentTask.addPropertyChangeListener(propertyChangeListener);
+            currentTask.execute();
         }
     }
 

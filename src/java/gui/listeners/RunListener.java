@@ -20,7 +20,6 @@ public class RunListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        button.setEnabled(false);
         ModelContainer.getInstance().runAutomatedTest();
         ModelContainer.getInstance().updateTable();
     }

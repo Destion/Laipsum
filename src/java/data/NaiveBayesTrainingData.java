@@ -55,4 +55,5 @@ public interface NaiveBayesTrainingData {
      */
     double getMutualInformation(NaiveBayesWordData word);
 
+    void addClass(String s);
 }

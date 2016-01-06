@@ -179,4 +179,9 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         }
 
     }
+
+    @Override
+    public void addClass(String s) {
+        totals.put(s, 0);
+    }
 }

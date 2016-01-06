@@ -49,4 +49,6 @@ public interface NaiveBayesClassifier {
 
 
     String[] getClassNames();
+
+    void addClass(String s);
 }

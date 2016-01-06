@@ -109,6 +109,10 @@ public class ModelContainer {
         }
     }
 
+    public boolean isTestRunning() {
+        return currentTask != null && !currentTask.isDone();
+    }
+
     public Object[][] getTestData() {
         String[] classNames = classifier.getClassNames();
         Object[][] out = new Object[classNames.length][];

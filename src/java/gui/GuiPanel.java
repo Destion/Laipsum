@@ -1,5 +1,6 @@
 package gui;
 
+import gui.mainScreenComponents.AddClassButton;
 import gui.mainScreenComponents.ClassSelectionComboBox;
 import gui.mainScreenComponents.GuiTestResultsTable;
 import gui.mainScreenComponents.TestProgressBar;
@@ -31,7 +32,7 @@ public class GuiPanel extends JPanel {
         button2Constraints.gridheight = 1;
         button2Constraints.weightx = 0.5;
 
-        JButton button2 = new JButton("Mick is een malloot");
+        AddClassButton button2 = new AddClassButton();
         this.add(button2, button2Constraints);
 
         GridBagConstraints tableConstraints = new GridBagConstraints();
@@ -84,7 +85,7 @@ public class GuiPanel extends JPanel {
 
         JButton button3 = new JButton("Add");
 
-        button3.addActionListener(new AdditionListener(tf, cb, ModelContainer.getInstance().getClassifier()));
+        button3.addActionListener(new AdditionListener(tf, cb));
         this.add(button3, button3Constraints);
 
         GridBagConstraints progressBarConstraints = new GridBagConstraints();

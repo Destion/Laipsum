@@ -108,4 +108,9 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
     public String[] getClassNames() {
         return data.getClasses();
     }
+
+    @Override
+    public void addClass(String s) {
+        data.addClass(s);
+    }
 }

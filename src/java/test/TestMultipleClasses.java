@@ -48,7 +48,7 @@ public class TestMultipleClasses {
     }
 
     public static void testClassifier(NaiveBayesClassifier classifier, String input, String correctClass) {
-        if (classifier.getClass(input).equals(correctClass)){
+        if (classifier.getClass(input).equals(correctClass)) {
             System.out.printf("The test \"%s\" was correctly classified as %s.\n", input, correctClass);
         } else {
             System.err.printf("The test \"%s\" was incorrectly classified as %s, it should have been %s.\n", input, classifier.getClass(input), correctClass);

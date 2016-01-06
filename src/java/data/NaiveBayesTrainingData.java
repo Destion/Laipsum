@@ -10,6 +10,7 @@ public interface NaiveBayesTrainingData {
 
     /**
      * Add data from a File to the data.
+     *
      * @param inputFile The File to read from.
      * @throws IOException When the file can not be opened.
      */
@@ -17,6 +18,7 @@ public interface NaiveBayesTrainingData {
 
     /**
      * Saves the data to a File.
+     *
      * @param outputFile the File to write.
      */
     void saveToFile(File outputFile) throws IOException;
@@ -24,13 +26,15 @@ public interface NaiveBayesTrainingData {
 
     /**
      * Adds data about a word to our data.
+     *
      * @param word The word.
-     * @param c The class of document it is in.
+     * @param c    The class of document it is in.
      */
     void train(String word, String c);
 
     /**
      * Get data about a word
+     *
      * @param word The String representing the word.
      * @return An object with data about the word.
      * @throws UnknownWordException This happens when the word does not exist in the data.
@@ -38,7 +42,6 @@ public interface NaiveBayesTrainingData {
     NaiveBayesWordData getWord(String word) throws UnknownWordException;
 
     /**
-     *
      * @return
      */
     int getnOccurrences();

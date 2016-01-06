@@ -1,7 +1,5 @@
 package gui.menus.classifierFileMenu;
 
-import classifiers.NaiveBayesClassifier;
-import classifiers.NaiveBayesClassifierImplementation;
 import gui.ModelContainer;
 import main.Util;
 
@@ -28,7 +26,7 @@ public class LoadToClassifier extends JMenuItem implements ActionListener {
                 ModelContainer.getInstance().getClassifier().trainFromFile(file);
                 ModelContainer.getInstance().updateTable();
             } catch (IOException e1) {
-                Util.showInfoBox("Failed to load classifier from "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
+                Util.showInfoBox("Failed to load classifier from " + file + "\n Error: \n" + e1.getLocalizedMessage(), "Loading failed");
                 e1.printStackTrace();
             }
         }

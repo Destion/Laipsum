@@ -2,7 +2,6 @@ package gui;
 
 import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
-import gui.mainScreenComponents.GuiTestResultsTable;
 
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -25,6 +24,7 @@ public class ModelContainer {
     private List<TestDataListener> listeners = new ArrayList<>();
 
     private static ModelContainer ourInstance = new ModelContainer();
+
     public static ModelContainer getInstance() {
         return ourInstance;
     }
@@ -59,7 +59,7 @@ public class ModelContainer {
     }
 
     public void trainOrTestFromFiles(File[] inputFiles, String fileClass, boolean train) throws IOException {
-        for (File file: inputFiles) {
+        for (File file : inputFiles) {
             if (file.isDirectory()) {
                 trainOrTestFromFiles(file.listFiles(), fileClass, train);
             } else {
@@ -80,23 +80,23 @@ public class ModelContainer {
         listeners.add(listener);
     }
 
-    public void updateTable(){
-        for (TestDataListener listener: listeners) {
+    public void updateTable() {
+        for (TestDataListener listener : listeners) {
             listener.onTestDataUpdate();
         }
     }
 
     public void addTestResult(String className, String classifiedAs) {
         if (!testData.containsKey(className)) {
-            Map<String, Integer> newMap =  new HashMap<>();
+            Map<String, Integer> newMap = new HashMap<>();
             testData.put(className, newMap);
             newMap.put(classifiedAs, 1);
-        } else if(!testData.get(className).containsKey(classifiedAs)) {
+        } else if (!testData.get(className).containsKey(classifiedAs)) {
             testData.get(className).put(classifiedAs, 1);
         } else {
             testData.get(className).put(classifiedAs,
                     testData.get(className).get(classifiedAs) + 1
-                    );
+            );
         }
     }
 
@@ -126,7 +126,7 @@ public class ModelContainer {
         return out;
     }
 
-    public void resetTestData(){
+    public void resetTestData() {
         testData = new HashMap<>();
     }
 

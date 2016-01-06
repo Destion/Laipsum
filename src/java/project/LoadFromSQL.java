@@ -3,7 +3,10 @@ package project;
 import classifiers.NaiveBayesClassifier;
 import classifiers.NaiveBayesClassifierImplementation;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,9 +35,9 @@ public class LoadFromSQL {
         Scanner in = new Scanner(new FileReader(sqlFile));
         Map<String, String> out = new HashMap<String, String>();
 
-        while (in.hasNext()){
+        while (in.hasNext()) {
             String line = in.nextLine();
-            if (line.matches(".* VALUES \\([0-9]*, '[^']*', '[^']*'\\);")){
+            if (line.matches(".* VALUES \\([0-9]*, '[^']*', '[^']*'\\);")) {
                 line = line.replaceAll(".* VALUES \\([0-9]*, '[^']*', '", "");
                 line = line.replaceAll("\\\\r\\\\n", " ");
                 out.put(line, "joke");

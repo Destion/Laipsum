@@ -15,8 +15,8 @@ public class TestBlogs {
         NaiveBayesClassifier classifier = new NaiveBayesClassifierImplementation();
 
         //Train our classifier to recognize whether our blogger is female.
-        for (String gender: new String[] {"M", "F"}) {
-            File[] files = (new File("./blogs/TrainingSet/"+gender)).listFiles();
+        for (String gender : new String[]{"M", "F"}) {
+            File[] files = (new File("./blogs/TrainingSet/" + gender)).listFiles();
             for (int i = 0; i < files.length; i++) {
                 try {
                     classifier.train(DocumentLoader.loadFromFile(files[i]), gender);
@@ -33,8 +33,8 @@ public class TestBlogs {
         int mf = 0;
         int fm = 0;
         int ff = 0;
-        for (String gender: new String[] {"M", "F"}) {
-            File[] files = (new File("./blogs/TestSet/"+gender)).listFiles();
+        for (String gender : new String[]{"M", "F"}) {
+            File[] files = (new File("./blogs/TestSet/" + gender)).listFiles();
             for (int i = 0; i < files.length; i++) {
                 try {
                     String classifiedAs = classifier.getClass(DocumentLoader.loadFromFile(files[i]));

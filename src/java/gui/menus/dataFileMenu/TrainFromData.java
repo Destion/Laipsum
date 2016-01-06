@@ -1,7 +1,5 @@
 package gui.menus.dataFileMenu;
 
-import classifiers.NaiveBayesClassifier;
-import classifiers.NaiveBayesClassifierImplementation;
 import gui.ModelContainer;
 import main.Util;
 

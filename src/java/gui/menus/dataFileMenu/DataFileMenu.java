@@ -1,9 +1,5 @@
 package gui.menus.dataFileMenu;
 
-import gui.menus.classifierFileMenu.LoadNewClassifier;
-import gui.menus.classifierFileMenu.LoadToClassifier;
-import gui.menus.classifierFileMenu.SaveClassifier;
-
 import javax.swing.*;
 
 /**

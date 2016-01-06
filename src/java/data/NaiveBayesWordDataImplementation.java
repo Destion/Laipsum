@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by gerben on 24-11-15.
  */
-public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
+public class NaiveBayesWordDataImplementation implements NaiveBayesWordData {
     private String word;
     private final Map<String, Integer> occurrences = new HashMap<String, Integer>();
     private int nOccurrences;
@@ -24,7 +24,7 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
 
     public int getnClass(String c) {
         Integer occ = occurrences.get(c);
-        return occ==null?0:occ;
+        return occ == null ? 0 : occ;
     }
 
     public int getnOccurrences() {
@@ -46,7 +46,7 @@ public class NaiveBayesWordDataImplementation implements NaiveBayesWordData{
 
     public void incrementnOccurrences() {
         miValid = false;
-        nOccurrences+=1;
+        nOccurrences += 1;
     }
 
     public void setMutualInformation(double maxMutualInfo) {

@@ -1,6 +1,9 @@
 package classifiers;
 
-import data.*;
+import data.NaiveBayesTrainingData;
+import data.NaiveBayesTrainingDataImplementation;
+import data.NaiveBayesWordData;
+import data.UnknownWordException;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +15,7 @@ import java.util.Map;
  */
 public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier {
     NaiveBayesTrainingData data = new NaiveBayesTrainingDataImplementation();
-    ArrayList<Double> MiList= new ArrayList<Double>();
+    ArrayList<Double> MiList = new ArrayList<Double>();
 
 
     public String getClass(String text) {
@@ -33,18 +36,18 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
                 }
             }
             double miAver = 0.0;
-            for (double MI : MiList){
+            for (double MI : MiList) {
                 miAver += MI;
             }
-            miAver = miAver/MiList.size();
+            miAver = miAver / MiList.size();
             for (String word2 : normalized) {
                 try {
                     NaiveBayesWordData wordData2 = data.getWord(word2);
                     double mi2 = data.getMutualInformation(wordData2);
-                    if (mi2 >= miAver){
+                    if (mi2 >= miAver) {
                         chanceClassGivenText += Math.log(wordData2.getnClass(c) + 1) - Math.log(totalClass + classes.length);
                     }
-                } catch(UnknownWordException e){
+                } catch (UnknownWordException e) {
                     chanceClassGivenText *= 1.0;
                 }
             }
@@ -77,14 +80,14 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
     }
 
     public void train(String text, String c) {
-        for (String word: normalize(text)) {
+        for (String word : normalize(text)) {
             data.train(word, c);
         }
 
     }
 
     public void train(Map<String, String> data) {
-        for(String text: data.keySet()) {
+        for (String text : data.keySet()) {
             train(text, data.get(text));
         }
 
@@ -97,7 +100,7 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
 
     public void saveKnowledgeToFile(File outputFile) throws IOException {
 
-            data.saveToFile(outputFile);
+        data.saveToFile(outputFile);
 
     }
 

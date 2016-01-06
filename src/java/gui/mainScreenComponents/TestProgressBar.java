@@ -1,7 +1,5 @@
 package gui.mainScreenComponents;
 
-import gui.TestTask;
-
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,7 +9,7 @@ import java.beans.PropertyChangeListener;
  */
 public class TestProgressBar extends JProgressBar implements PropertyChangeListener {
 
-    public TestProgressBar(){
+    public TestProgressBar() {
         super();
         setVisible(false);
         setStringPainted(true);
@@ -21,10 +19,10 @@ public class TestProgressBar extends JProgressBar implements PropertyChangeListe
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals("progress")) {
+        if (evt.getPropertyName().equals("progress")) {
             double progress = (double) evt.getNewValue();
             setValue((int) (progress * 100));
-        } else if(evt.getPropertyName().equals("active")) {
+        } else if (evt.getPropertyName().equals("active")) {
             setVisible((Boolean) evt.getNewValue());
         }
     }

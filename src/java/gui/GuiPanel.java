@@ -1,21 +1,18 @@
 package gui;
 
-import data.NaiveBayesTrainingDataImplementation;
 import gui.mainScreenComponents.ClassSelectionComboBox;
 import gui.mainScreenComponents.GuiTestResultsTable;
 import gui.mainScreenComponents.TestProgressBar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Destion on 4-1-2016.
  */
 public class GuiPanel extends JPanel {
 
-    public GuiPanel(){
+    public GuiPanel() {
         super();
         setLayout(new GridBagLayout());
 
@@ -103,8 +100,6 @@ public class GuiPanel extends JPanel {
         add(progressBar, progressBarConstraints);
 
     }
-
-
 
 
 }

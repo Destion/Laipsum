@@ -24,9 +24,9 @@ public class SaveClassifier extends JMenuItem implements ActionListener {
         if (file != null) {
             try {
                 ModelContainer.getInstance().getClassifier().saveKnowledgeToFile(file);
-                Util.showInfoBox("Successfully saved classifier to "+ file, "Saving successful");
+                Util.showInfoBox("Successfully saved classifier to " + file, "Saving successful");
             } catch (IOException e1) {
-                Util.showInfoBox("Failed to save classifier to "+ file + "\n Error: \n" + e1.getLocalizedMessage(), "Saving failed");
+                Util.showInfoBox("Failed to save classifier to " + file + "\n Error: \n" + e1.getLocalizedMessage(), "Saving failed");
                 e1.printStackTrace();
             }
         }

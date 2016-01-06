@@ -23,7 +23,7 @@ public class TestMails {
             File[] files = folders[i].listFiles();
             for (int j = 0; j < files.length; j++) {
                 try {
-                    classifier.train(DocumentLoader.loadFromFile(files[j]), files[j].getName().contains("spm")?"spm":"msg");
+                    classifier.train(DocumentLoader.loadFromFile(files[j]), files[j].getName().contains("spm") ? "spm" : "msg");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -32,7 +32,7 @@ public class TestMails {
         }
 
 
-        File[] files = folders[folders.length -1].listFiles();
+        File[] files = folders[folders.length - 1].listFiles();
         int rightSpam = 0;
         int wrongSpam = 0;
         int rightMessage = 0;
@@ -62,7 +62,6 @@ public class TestMails {
         System.out.printf("Messages correctly classified: %d\n", rightMessage);
         System.out.printf("Spam not classified as such: %d\n", wrongSpam);
         System.out.printf("Messages not classified as such: %d\n", wrongMessage);
-
 
 
     }

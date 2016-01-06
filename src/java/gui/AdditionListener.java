@@ -1,7 +1,6 @@
 package gui;
 
 import classifiers.NaiveBayesClassifier;
-import data.NaiveBayesTrainingDataImplementation;
 import gui.mainScreenComponents.ClassSelectionComboBox;
 
 import javax.swing.*;
@@ -16,7 +15,7 @@ public class AdditionListener implements ActionListener {
     JTextField tf;
     ClassSelectionComboBox cb;
 
-    public AdditionListener(JTextField tf, ClassSelectionComboBox cb, NaiveBayesClassifier nbc){
+    public AdditionListener(JTextField tf, ClassSelectionComboBox cb) {
         super();
         this.tf = tf;
         this.cb = cb;
@@ -25,15 +24,15 @@ public class AdditionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         NaiveBayesClassifier nbc = ModelContainer.getInstance().getClassifier();
-        char[] temp = tf.getText().toCharArray();
         boolean valid = true;
 
-        if (tf.getText() == "" || cb.getSelectedItem() == null){
+        if (tf.getText().equals("") || cb.getSelectedItem() == null) {
             valid = false;
         }
 
         if (valid){
             nbc.train(tf.getText(), (String) cb.getSelectedItem());
+            tf.setText("");
         }
     }
 }

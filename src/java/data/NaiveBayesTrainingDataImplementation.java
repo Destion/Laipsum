@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Created by gerben on 24-11-15.
  */
-public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingData{
+public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingData {
 
     private Map<String, NaiveBayesWordData> data;
 
@@ -26,7 +26,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     public void addFromFile(File inputFile) throws IOException {
         Scanner in = new Scanner(new FileInputStream(inputFile));
         String[] classNames = null;
-        if(in.hasNextLine()) {
+        if (in.hasNextLine()) {
             String line = in.nextLine();
             classNames = line.split(",");
 
@@ -45,12 +45,12 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
                     }
                 }
                 totalWords += Integer.decode(args[args.length - 1]);
-                if (data.containsKey(args[0])){
+                if (data.containsKey(args[0])) {
                     NaiveBayesWordData word = data.get(args[0]);
                     NaiveBayesWordData newWord = new NaiveBayesWordDataImplementation(
                             args[0],
                             Integer.decode(args[args.length - 1]) + word.getnOccurrences()
-                            );
+                    );
                     data.put(args[0], newWord);
 
                 } else {
@@ -63,7 +63,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
                     );
                     for (int i = 0; i < classNames.length; i++) {
                         data.get(args[0]).incrementnClass(classNames[i],
-                                Integer.decode(args[i+1]));
+                                Integer.decode(args[i + 1]));
 
                     }
                 }
@@ -79,12 +79,12 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         String classString = "";
         for (int i = 0; i < classes.length; i++) {
             classString += classes[i];
-            if (i < classes.length-1){
+            if (i < classes.length - 1) {
                 classString += ",";
             }
         }
-        out.write(classString+"\n");
-        for (NaiveBayesWordData word: data.values()) {
+        out.write(classString + "\n");
+        for (NaiveBayesWordData word : data.values()) {
             String classInfo = "";
             for (String c : classes) {
                 classInfo += word.getnClass(c) + ",";
@@ -94,7 +94,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
                     word.getWord(),
                     classInfo,
                     word.getnOccurrences()
-                    ));
+            ));
         }
         out.close();
     }
@@ -102,7 +102,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
 
     public void train(String word, String c) {
         //increment the total amount of words counted.
-        totalWords ++;
+        totalWords++;
 
         //Increment the total number of jokes if it is a joke.
         if (totals.containsKey(c)) {
@@ -151,7 +151,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
     public int getnClassOccurrences(String c) {
         Integer occurrences = totals.get(c);
 
-        return occurrences==null?0:occurrences;
+        return occurrences == null ? 0 : occurrences;
     }
 
     public String[] getClasses() {
@@ -169,7 +169,7 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
                 double b = word.getnOccurrences() - a;
                 //a+=1;
                 //b+=1;
-                double mi = -Math.log(1 + 1/(a/b))-Math.log((word.getnOccurrences())/totalWords);
+                double mi = -Math.log(1 + 1 / (a / b)) - Math.log((word.getnOccurrences()) / totalWords);
                 if (mi > maxMutualInfo) {
                     maxMutualInfo = mi;
                 }

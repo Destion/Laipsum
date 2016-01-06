@@ -19,6 +19,7 @@ public class Util {
     public static File promptFile() {
         return promptFile(false);
     }
+
     public static File promptFile(boolean save) {
         //Create a file chooser
         final JFileChooser fc = new JFileChooser("./");

@@ -116,4 +116,8 @@ public class NaiveBayesClassifierImplementation implements NaiveBayesClassifier 
     public void addClass(String s) {
         data.addClass(s);
     }
+
+    public NaiveBayesTrainingData getData(){
+        return this.data;
+    }
 }

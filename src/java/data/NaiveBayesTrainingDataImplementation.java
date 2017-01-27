@@ -144,6 +144,10 @@ public class NaiveBayesTrainingDataImplementation implements NaiveBayesTrainingD
         return wordData;
     }
 
+    public String[] getWords(){
+        return Util.toStringArray(this.data.keySet().toArray());
+    }
+
     public int getnOccurrences() {
         return totalWords;
     }

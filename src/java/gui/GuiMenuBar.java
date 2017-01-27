@@ -1,5 +1,7 @@
 package gui;
 
+import classifiers.NaiveBayesClassifierImplementation;
+import gui.menus.chiSquareMenu.ChiSquareMenu;
 import gui.menus.classifierFileMenu.ClassifierFileMenu;
 import gui.menus.dataFileMenu.DataFileMenu;
 
@@ -10,11 +12,11 @@ import javax.swing.*;
  */
 public class GuiMenuBar extends JMenuBar {
 
-    public GuiMenuBar() {
+    public GuiMenuBar(NaiveBayesClassifierImplementation classifier) {
         super();
         add(new ClassifierFileMenu());
         add(new DataFileMenu());
-
+        add(new ChiSquareMenu());
     }
 
 }

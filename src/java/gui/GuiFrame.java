@@ -1,5 +1,7 @@
 package gui;
 
+import classifiers.NaiveBayesClassifierImplementation;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,7 +31,7 @@ public class GuiFrame extends JFrame {
 
 
         setTitle("Naive Bayes Classifier");
-        setJMenuBar(new GuiMenuBar());
+        setJMenuBar(new GuiMenuBar((NaiveBayesClassifierImplementation) ModelContainer.getInstance().getClassifier()));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);

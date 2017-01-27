@@ -33,8 +33,6 @@ public class GuiFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-
-
     }
 
     public static void main(String[] args) {
